@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="PostButtonCell" customModule="Choozy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UYy-ec-L5G">
+                        <rect key="frame" x="10" y="20" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="9Gc-1X-rDZ"/>
+                            <constraint firstAttribute="width" secondItem="UYy-ec-L5G" secondAttribute="height" multiplier="1:1" id="R7q-qj-jkq"/>
+                            <constraint firstAttribute="width" constant="40" id="ssI-eU-nKH"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L56-BR-lWq">
+                        <rect key="frame" x="60" y="20" width="250" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="Icl-l9-f5F"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="L56-BR-lWq" firstAttribute="leading" secondItem="UYy-ec-L5G" secondAttribute="trailing" constant="10" id="2Ff-nE-SQB"/>
+                    <constraint firstItem="L56-BR-lWq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QZ4-z8-gT3"/>
+                    <constraint firstItem="UYy-ec-L5G" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UcQ-Wo-Pqu"/>
+                    <constraint firstItem="L56-BR-lWq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Zkf-mF-t3B"/>
+                    <constraint firstAttribute="bottom" secondItem="L56-BR-lWq" secondAttribute="bottom" constant="20" id="bwb-YE-Cdf"/>
+                    <constraint firstAttribute="trailing" secondItem="L56-BR-lWq" secondAttribute="trailing" constant="10" id="v4t-Fn-eRl"/>
+                    <constraint firstItem="UYy-ec-L5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="w1w-g1-qgi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="postAuthorImageView" destination="UYy-ec-L5G" id="TDq-T7-Lbv"/>
+                <outlet property="postButton" destination="L56-BR-lWq" id="3X8-xc-IFn"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="72"/>
+        </tableViewCell>
+    </objects>
+</document>

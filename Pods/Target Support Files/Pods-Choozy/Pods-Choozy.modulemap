@@ -1,0 +1,6 @@
+framework module Pods_Choozy {
+  umbrella header "Pods-Choozy-umbrella.h"
+
+  export *
+  module * { export * }
+}

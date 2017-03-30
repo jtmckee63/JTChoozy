@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PostCell" customModule="Choozy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="205" height="205"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="205" height="205"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eth-ci-Vnv">
+                        <rect key="frame" x="0.0" y="0.0" width="205" height="205"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="eth-ci-Vnv" secondAttribute="height" multiplier="1:1" id="a1t-TQ-q18"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eth-ci-Vnv" secondAttribute="trailing" id="03K-Ik-WZh"/>
+                <constraint firstItem="eth-ci-Vnv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5AX-Q3-10t"/>
+                <constraint firstItem="eth-ci-Vnv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QyL-qz-nVy"/>
+                <constraint firstAttribute="bottom" secondItem="eth-ci-Vnv" secondAttribute="bottom" id="bev-aB-90R"/>
+            </constraints>
+            <size key="customSize" width="205" height="205"/>
+            <connections>
+                <outlet property="postImageView" destination="eth-ci-Vnv" id="ddo-8j-Gdz"/>
+            </connections>
+            <point key="canvasLocation" x="111.5" y="26.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

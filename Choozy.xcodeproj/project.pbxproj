@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C49FA991E8C7261002D976A /* PostAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FA981E8C7261002D976A /* PostAnnotation.swift */; };
+		4C49FA9C1E8C765E002D976A /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FA9B1E8C765E002D976A /* DetailController.swift */; };
+		4C49FAA11E8C7A67002D976A /* DetailHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FA9F1E8C7A67002D976A /* DetailHeaderCell.swift */; };
+		4C49FAA21E8C7A67002D976A /* DetailHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49FAA01E8C7A67002D976A /* DetailHeaderCell.xib */; };
+		4C49FAA41E8C7AAB002D976A /* ChoozyUserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAA31E8C7AAB002D976A /* ChoozyUserImageView.swift */; };
+		4C49FAA61E8C7AE3002D976A /* ChoozyUserLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAA51E8C7AE3002D976A /* ChoozyUserLabel.swift */; };
+		4C49FAA91E8C947B002D976A /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAA71E8C947B002D976A /* CommentCell.swift */; };
+		4C49FAAA1E8C947B002D976A /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49FAA81E8C947B002D976A /* CommentCell.xib */; };
+		4C49FAAC1E8C94AC002D976A /* CommentDetailButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAAB1E8C94AC002D976A /* CommentDetailButton.swift */; };
+		4C49FAB01E8CA043002D976A /* ChoozyPlaceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAAF1E8CA043002D976A /* ChoozyPlaceLabel.swift */; };
+		4C49FAB21E8CA3EF002D976A /* NewPostController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49FAB11E8CA3EF002D976A /* NewPostController.xib */; };
+		4C49FAB41E8CA6A2002D976A /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAB31E8CA6A2002D976A /* PlaceController.swift */; };
+		4C49FAB61E8CA6BC002D976A /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAB51E8CA6BC002D976A /* ProfileController.swift */; };
+		4C49FAB91E8CAD23002D976A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FAB71E8CAD23002D976A /* PostCell.swift */; };
+		4C49FABA1E8CAD23002D976A /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49FAB81E8CAD23002D976A /* PostCell.xib */; };
+		4C49FABD1E8CAEDE002D976A /* PostHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C49FABB1E8CAEDE002D976A /* PostHeaderReusableView.swift */; };
+		4C49FABE1E8CAEDE002D976A /* PostHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C49FABC1E8CAEDE002D976A /* PostHeaderReusableView.xib */; };
+		4C5536471E8C6CD20043A969 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5536461E8C6CD20043A969 /* Post.swift */; };
+		4C5536491E8C6CDC0043A969 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5536481E8C6CDC0043A969 /* Comment.swift */; };
+		4C6895DB1E68E8CC00208365 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6895DA1E68E8CC00208365 /* LoginController.swift */; };
+		4C6895DD1E68E97200208365 /* BackgroundVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6895DC1E68E97200208365 /* BackgroundVideo.swift */; };
+		4C6895DF1E68EA1200208365 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4C6895DE1E68EA1200208365 /* intro.mp4 */; };
+		4C6895E11E68EA4700208365 /* ChoozyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6895E01E68EA4700208365 /* ChoozyUser.swift */; };
+		4C6895E31E68EAFB00208365 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6895E21E68EAFB00208365 /* Extensions.swift */; };
+		4C6895E51E68EB8900208365 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6895E41E68EB8900208365 /* Helpers.swift */; };
+		4C6F0EAC1E67B1B700D26955 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F0EAB1E67B1B700D26955 /* AppDelegate.swift */; };
+		4C6F0EAE1E67B1B700D26955 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F0EAD1E67B1B700D26955 /* ViewController.swift */; };
+		4C6F0EB11E67B1B700D26955 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F0EAF1E67B1B700D26955 /* Main.storyboard */; };
+		4C6F0EB41E67B1B700D26955 /* Choozy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F0EB21E67B1B700D26955 /* Choozy.xcdatamodeld */; };
+		4C6F0EB61E67B1B700D26955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F0EB51E67B1B700D26955 /* Assets.xcassets */; };
+		4C6F0EB91E67B1B700D26955 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C6F0EB71E67B1B700D26955 /* LaunchScreen.storyboard */; };
+		4CB9F0881E6E32A500113585 /* NewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F0861E6E32A500113585 /* NewPostController.swift */; };
+		4CB9F08F1E6E356500113585 /* PostMediaViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F08D1E6E356500113585 /* PostMediaViewCell.swift */; };
+		4CB9F0901E6E356500113585 /* PostMediaViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F08E1E6E356500113585 /* PostMediaViewCell.xib */; };
+		4CB9F0921E6E3A6000113585 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F0911E6E3A6000113585 /* Place.swift */; };
+		4CB9F0951E6E40EC00113585 /* PlacesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F0931E6E40EC00113585 /* PlacesCell.swift */; };
+		4CB9F0961E6E40EC00113585 /* PlacesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F0941E6E40EC00113585 /* PlacesCell.xib */; };
+		4CB9F0991E6E415300113585 /* PlaceImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F0971E6E415300113585 /* PlaceImageCell.swift */; };
+		4CB9F09A1E6E415300113585 /* PlaceImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F0981E6E415300113585 /* PlaceImageCell.xib */; };
+		4CB9F09D1E7087F800113585 /* PostCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F09B1E7087F800113585 /* PostCommentCell.swift */; };
+		4CB9F09E1E7087F800113585 /* PostCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F09C1E7087F800113585 /* PostCommentCell.xib */; };
+		4CB9F0A11E7088D400113585 /* PostButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F09F1E7088D400113585 /* PostButtonCell.swift */; };
+		4CB9F0A21E7088D400113585 /* PostButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F0A01E7088D400113585 /* PostButtonCell.xib */; };
+		FFF454188DEC9A7B13C0E898 /* Pods_Choozy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4C49FA981E8C7261002D976A /* PostAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAnnotation.swift; sourceTree = "<group>"; };
+		4C49FA9B1E8C765E002D976A /* DetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		4C49FA9F1E8C7A67002D976A /* DetailHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailHeaderCell.swift; path = Choozy/DetailHeaderCell.swift; sourceTree = "<group>"; };
+		4C49FAA01E8C7A67002D976A /* DetailHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailHeaderCell.xib; path = Choozy/DetailHeaderCell.xib; sourceTree = "<group>"; };
+		4C49FAA31E8C7AAB002D976A /* ChoozyUserImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChoozyUserImageView.swift; path = Choozy/ChoozyUserImageView.swift; sourceTree = "<group>"; };
+		4C49FAA51E8C7AE3002D976A /* ChoozyUserLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChoozyUserLabel.swift; path = Choozy/ChoozyUserLabel.swift; sourceTree = "<group>"; };
+		4C49FAA71E8C947B002D976A /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCell.swift; path = Choozy/CommentCell.swift; sourceTree = "<group>"; };
+		4C49FAA81E8C947B002D976A /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentCell.xib; path = Choozy/CommentCell.xib; sourceTree = "<group>"; };
+		4C49FAAB1E8C94AC002D976A /* CommentDetailButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentDetailButton.swift; path = Choozy/CommentDetailButton.swift; sourceTree = "<group>"; };
+		4C49FAAF1E8CA043002D976A /* ChoozyPlaceLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoozyPlaceLabel.swift; sourceTree = "<group>"; };
+		4C49FAB11E8CA3EF002D976A /* NewPostController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewPostController.xib; path = Choozy/NewPostController.xib; sourceTree = "<group>"; };
+		4C49FAB31E8CA6A2002D976A /* PlaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceController.swift; sourceTree = "<group>"; };
+		4C49FAB51E8CA6BC002D976A /* ProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		4C49FAB71E8CAD23002D976A /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		4C49FAB81E8CAD23002D976A /* PostCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		4C49FABB1E8CAEDE002D976A /* PostHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostHeaderReusableView.swift; sourceTree = "<group>"; };
+		4C49FABC1E8CAEDE002D976A /* PostHeaderReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostHeaderReusableView.xib; sourceTree = "<group>"; };
+		4C5536461E8C6CD20043A969 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4C5536481E8C6CDC0043A969 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		4C6895DA1E68E8CC00208365 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		4C6895DC1E68E97200208365 /* BackgroundVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundVideo.swift; path = Choozy/BackgroundVideo.swift; sourceTree = "<group>"; };
+		4C6895DE1E68EA1200208365 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
+		4C6895E01E68EA4700208365 /* ChoozyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoozyUser.swift; sourceTree = "<group>"; };
+		4C6895E21E68EAFB00208365 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4C6895E41E68EB8900208365 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		4C6F0EA81E67B1B600D26955 /* Choozy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Choozy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C6F0EAB1E67B1B700D26955 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4C6F0EAD1E67B1B700D26955 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C6F0EB01E67B1B700D26955 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4C6F0EB31E67B1B700D26955 /* Choozy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Choozy.xcdatamodel; sourceTree = "<group>"; };
+		4C6F0EB51E67B1B700D26955 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4C6F0EB81E67B1B700D26955 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4C6F0EBA1E67B1B700D26955 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CB9F0861E6E32A500113585 /* NewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostController.swift; sourceTree = "<group>"; };
+		4CB9F08D1E6E356500113585 /* PostMediaViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMediaViewCell.swift; sourceTree = "<group>"; };
+		4CB9F08E1E6E356500113585 /* PostMediaViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostMediaViewCell.xib; sourceTree = "<group>"; };
+		4CB9F0911E6E3A6000113585 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		4CB9F0931E6E40EC00113585 /* PlacesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesCell.swift; sourceTree = "<group>"; };
+		4CB9F0941E6E40EC00113585 /* PlacesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlacesCell.xib; sourceTree = "<group>"; };
+		4CB9F0971E6E415300113585 /* PlaceImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceImageCell.swift; sourceTree = "<group>"; };
+		4CB9F0981E6E415300113585 /* PlaceImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceImageCell.xib; sourceTree = "<group>"; };
+		4CB9F09B1E7087F800113585 /* PostCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCommentCell.swift; sourceTree = "<group>"; };
+		4CB9F09C1E7087F800113585 /* PostCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostCommentCell.xib; sourceTree = "<group>"; };
+		4CB9F09F1E7088D400113585 /* PostButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostButtonCell.swift; sourceTree = "<group>"; };
+		4CB9F0A01E7088D400113585 /* PostButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostButtonCell.xib; sourceTree = "<group>"; };
+		C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Choozy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Choozy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Choozy/Pods-Choozy.release.xcconfig"; sourceTree = "<group>"; };
+		D65A7526FDB9A0D55EC56AA5 /* Pods-Choozy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Choozy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Choozy/Pods-Choozy.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C6F0EA51E67B1B600D26955 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FFF454188DEC9A7B13C0E898 /* Pods_Choozy.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C49FA9A1E8C7275002D976A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C49FA981E8C7261002D976A /* PostAnnotation.swift */,
+				4CB9F08C1E6E34B700113585 /* Xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4C49FAAD1E8C9E28002D976A /* New Post */ = {
+			isa = PBXGroup;
+			children = (
+				4CB9F08D1E6E356500113585 /* PostMediaViewCell.swift */,
+				4CB9F08E1E6E356500113585 /* PostMediaViewCell.xib */,
+				4CB9F0931E6E40EC00113585 /* PlacesCell.swift */,
+				4CB9F0941E6E40EC00113585 /* PlacesCell.xib */,
+				4CB9F0971E6E415300113585 /* PlaceImageCell.swift */,
+				4CB9F0981E6E415300113585 /* PlaceImageCell.xib */,
+				4CB9F09F1E7088D400113585 /* PostButtonCell.swift */,
+				4CB9F0A01E7088D400113585 /* PostButtonCell.xib */,
+				4CB9F09B1E7087F800113585 /* PostCommentCell.swift */,
+				4CB9F09C1E7087F800113585 /* PostCommentCell.xib */,
+			);
+			name = "New Post";
+			sourceTree = "<group>";
+		};
+		4C49FAAE1E8C9E47002D976A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				4C49FA9F1E8C7A67002D976A /* DetailHeaderCell.swift */,
+				4C49FAA01E8C7A67002D976A /* DetailHeaderCell.xib */,
+				4C49FAA71E8C947B002D976A /* CommentCell.swift */,
+				4C49FAA81E8C947B002D976A /* CommentCell.xib */,
+				4C49FAAB1E8C94AC002D976A /* CommentDetailButton.swift */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		4C49FABF1E8CAEE6002D976A /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				4C49FAB71E8CAD23002D976A /* PostCell.swift */,
+				4C49FAB81E8CAD23002D976A /* PostCell.xib */,
+				4C49FABB1E8CAEDE002D976A /* PostHeaderReusableView.swift */,
+				4C49FABC1E8CAEDE002D976A /* PostHeaderReusableView.xib */,
+			);
+			name = Place;
+			sourceTree = "<group>";
+		};
+		4C6895E81E692CAC00208365 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4C6895E41E68EB8900208365 /* Helpers.swift */,
+				4C6895E21E68EAFB00208365 /* Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		4C6895E91E692CB300208365 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C6895DA1E68E8CC00208365 /* LoginController.swift */,
+				4C6F0EAD1E67B1B700D26955 /* ViewController.swift */,
+				4C49FA9B1E8C765E002D976A /* DetailController.swift */,
+				4C49FAB31E8CA6A2002D976A /* PlaceController.swift */,
+				4CB9F0861E6E32A500113585 /* NewPostController.swift */,
+				4C49FAB51E8CA6BC002D976A /* ProfileController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		4C6895EA1E692CB900208365 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C6895E01E68EA4700208365 /* ChoozyUser.swift */,
+				4CB9F0911E6E3A6000113585 /* Place.swift */,
+				4C5536461E8C6CD20043A969 /* Post.swift */,
+				4C5536481E8C6CDC0043A969 /* Comment.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4C6895EB1E692CD400208365 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4C6895DE1E68EA1200208365 /* intro.mp4 */,
+				4C6F0EB51E67B1B700D26955 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		4C6F0E9F1E67B1B600D26955 = {
+			isa = PBXGroup;
+			children = (
+				4C6F0EAA1E67B1B700D26955 /* Choozy */,
+				4C6F0EA91E67B1B600D26955 /* Products */,
+				E7157E7D952C2B11C1F286B3 /* Pods */,
+				E1ADCBEB58B63114ABB43584 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4C6F0EA91E67B1B600D26955 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F0EA81E67B1B600D26955 /* Choozy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C6F0EAA1E67B1B700D26955 /* Choozy */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F0EAB1E67B1B700D26955 /* AppDelegate.swift */,
+				4C6895EA1E692CB900208365 /* Model */,
+				4C6895E91E692CB300208365 /* Controllers */,
+				4C6895E81E692CAC00208365 /* Helpers */,
+				4C6F0EAF1E67B1B700D26955 /* Main.storyboard */,
+				4C6F0EB71E67B1B700D26955 /* LaunchScreen.storyboard */,
+				4C49FA9A1E8C7275002D976A /* View */,
+				4C6895EB1E692CD400208365 /* Assets */,
+				4C6F0EBA1E67B1B700D26955 /* Info.plist */,
+				4C6F0EB21E67B1B700D26955 /* Choozy.xcdatamodeld */,
+			);
+			path = Choozy;
+			sourceTree = "<group>";
+		};
+		4CB9F08C1E6E34B700113585 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				4C49FAB11E8CA3EF002D976A /* NewPostController.xib */,
+				4C49FAA31E8C7AAB002D976A /* ChoozyUserImageView.swift */,
+				4C49FAA51E8C7AE3002D976A /* ChoozyUserLabel.swift */,
+				4C49FAAF1E8CA043002D976A /* ChoozyPlaceLabel.swift */,
+				4C49FAAE1E8C9E47002D976A /* Detail */,
+				4C49FAAD1E8C9E28002D976A /* New Post */,
+				4C49FABF1E8CAEE6002D976A /* Place */,
+			);
+			name = Xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		E1ADCBEB58B63114ABB43584 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C6895DC1E68E97200208365 /* BackgroundVideo.swift */,
+				C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7157E7D952C2B11C1F286B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D65A7526FDB9A0D55EC56AA5 /* Pods-Choozy.debug.xcconfig */,
+				D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C6F0EA71E67B1B600D26955 /* Choozy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C6F0EBD1E67B1B700D26955 /* Build configuration list for PBXNativeTarget "Choozy" */;
+			buildPhases = (
+				2BFF05DCDECB51C1B72AE3AD /* [CP] Check Pods Manifest.lock */,
+				4C6F0EA41E67B1B600D26955 /* Sources */,
+				4C6F0EA51E67B1B600D26955 /* Frameworks */,
+				4C6F0EA61E67B1B600D26955 /* Resources */,
+				EF5F3D275AE8CC0761EABC43 /* [CP] Embed Pods Frameworks */,
+				D2199FB830CCE9F8EEAD8DB9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Choozy;
+			productName = Choozy;
+			productReference = 4C6F0EA81E67B1B600D26955 /* Choozy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C6F0EA01E67B1B600D26955 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Cameron Eubank";
+				TargetAttributes = {
+					4C6F0EA71E67B1B600D26955 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 43B8W7K368;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4C6F0EA31E67B1B600D26955 /* Build configuration list for PBXProject "Choozy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C6F0E9F1E67B1B600D26955;
+			productRefGroup = 4C6F0EA91E67B1B600D26955 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C6F0EA71E67B1B600D26955 /* Choozy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C6F0EA61E67B1B600D26955 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6895DF1E68EA1200208365 /* intro.mp4 in Resources */,
+				4C49FAA21E8C7A67002D976A /* DetailHeaderCell.xib in Resources */,
+				4C49FABA1E8CAD23002D976A /* PostCell.xib in Resources */,
+				4C49FAAA1E8C947B002D976A /* CommentCell.xib in Resources */,
+				4CB9F0961E6E40EC00113585 /* PlacesCell.xib in Resources */,
+				4CB9F0A21E7088D400113585 /* PostButtonCell.xib in Resources */,
+				4CB9F09A1E6E415300113585 /* PlaceImageCell.xib in Resources */,
+				4C6F0EB91E67B1B700D26955 /* LaunchScreen.storyboard in Resources */,
+				4C49FABE1E8CAEDE002D976A /* PostHeaderReusableView.xib in Resources */,
+				4CB9F09E1E7087F800113585 /* PostCommentCell.xib in Resources */,
+				4CB9F0901E6E356500113585 /* PostMediaViewCell.xib in Resources */,
+				4C6F0EB61E67B1B700D26955 /* Assets.xcassets in Resources */,
+				4C49FAB21E8CA3EF002D976A /* NewPostController.xib in Resources */,
+				4C6F0EB11E67B1B700D26955 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2BFF05DCDECB51C1B72AE3AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D2199FB830CCE9F8EEAD8DB9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Choozy/Pods-Choozy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF5F3D275AE8CC0761EABC43 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Choozy/Pods-Choozy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C6F0EA41E67B1B600D26955 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C6F0EAE1E67B1B700D26955 /* ViewController.swift in Sources */,
+				4C6895DB1E68E8CC00208365 /* LoginController.swift in Sources */,
+				4CB9F0881E6E32A500113585 /* NewPostController.swift in Sources */,
+				4CB9F0951E6E40EC00113585 /* PlacesCell.swift in Sources */,
+				4C6895DD1E68E97200208365 /* BackgroundVideo.swift in Sources */,
+				4C5536491E8C6CDC0043A969 /* Comment.swift in Sources */,
+				4CB9F0A11E7088D400113585 /* PostButtonCell.swift in Sources */,
+				4C49FAB91E8CAD23002D976A /* PostCell.swift in Sources */,
+				4C49FA9C1E8C765E002D976A /* DetailController.swift in Sources */,
+				4CB9F09D1E7087F800113585 /* PostCommentCell.swift in Sources */,
+				4C49FAA11E8C7A67002D976A /* DetailHeaderCell.swift in Sources */,
+				4C6895E51E68EB8900208365 /* Helpers.swift in Sources */,
+				4CB9F08F1E6E356500113585 /* PostMediaViewCell.swift in Sources */,
+				4C49FAB01E8CA043002D976A /* ChoozyPlaceLabel.swift in Sources */,
+				4C49FAB41E8CA6A2002D976A /* PlaceController.swift in Sources */,
+				4C49FAB61E8CA6BC002D976A /* ProfileController.swift in Sources */,
+				4C49FA991E8C7261002D976A /* PostAnnotation.swift in Sources */,
+				4C49FAA91E8C947B002D976A /* CommentCell.swift in Sources */,
+				4C49FAAC1E8C94AC002D976A /* CommentDetailButton.swift in Sources */,
+				4CB9F0991E6E415300113585 /* PlaceImageCell.swift in Sources */,
+				4C6F0EAC1E67B1B700D26955 /* AppDelegate.swift in Sources */,
+				4C5536471E8C6CD20043A969 /* Post.swift in Sources */,
+				4C6895E11E68EA4700208365 /* ChoozyUser.swift in Sources */,
+				4C6F0EB41E67B1B700D26955 /* Choozy.xcdatamodeld in Sources */,
+				4CB9F0921E6E3A6000113585 /* Place.swift in Sources */,
+				4C49FAA61E8C7AE3002D976A /* ChoozyUserLabel.swift in Sources */,
+				4C49FABD1E8CAEDE002D976A /* PostHeaderReusableView.swift in Sources */,
+				4C6895E31E68EAFB00208365 /* Extensions.swift in Sources */,
+				4C49FAA41E8C7AAB002D976A /* ChoozyUserImageView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4C6F0EAF1E67B1B700D26955 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C6F0EB01E67B1B700D26955 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4C6F0EB71E67B1B700D26955 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C6F0EB81E67B1B700D26955 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C6F0EBB1E67B1B700D26955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4C6F0EBC1E67B1B700D26955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4C6F0EBE1E67B1B700D26955 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D65A7526FDB9A0D55EC56AA5 /* Pods-Choozy.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 43B8W7K368;
+				INFOPLIST_FILE = Choozy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CameronEubank.Choozy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4C6F0EBF1E67B1B700D26955 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 43B8W7K368;
+				INFOPLIST_FILE = Choozy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = CameronEubank.Choozy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C6F0EA31E67B1B600D26955 /* Build configuration list for PBXProject "Choozy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C6F0EBB1E67B1B700D26955 /* Debug */,
+				4C6F0EBC1E67B1B700D26955 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C6F0EBD1E67B1B700D26955 /* Build configuration list for PBXNativeTarget "Choozy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C6F0EBE1E67B1B700D26955 /* Debug */,
+				4C6F0EBF1E67B1B700D26955 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4C6F0EB21E67B1B700D26955 /* Choozy.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4C6F0EB31E67B1B700D26955 /* Choozy.xcdatamodel */,
+			);
+			currentVersion = 4C6F0EB31E67B1B700D26955 /* Choozy.xcdatamodel */;
+			path = Choozy.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4C6F0EA01E67B1B600D26955 /* Project object */;
+}
