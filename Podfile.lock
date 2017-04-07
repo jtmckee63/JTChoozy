@@ -8,11 +8,19 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DropDownMenuKit (0.8.2)
   - FBSDKCoreKit (4.18.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.18.0):
     - FBSDKCoreKit
+  - GoogleMaps (2.1.1):
+    - GoogleMaps/Maps (= 2.1.1)
   - GoogleMaps/Base (2.1.1)
+  - GoogleMaps/Maps (2.1.1):
+    - GoogleMaps/Base
+  - GooglePlacePicker (2.1.1):
+    - GoogleMaps (= 2.1.1)
+    - GooglePlaces (= 2.1.1)
   - GooglePlaces (2.1.1):
     - GoogleMaps/Base (= 2.1.1)
   - Parse (1.14.2):
@@ -32,7 +40,10 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
+  - DropDownMenuKit
   - FBSDKCoreKit (~> 4.18)
+  - GoogleMaps
+  - GooglePlacePicker
   - GooglePlaces
   - Parse
   - ParseFacebookUtilsV4
@@ -44,9 +55,11 @@ SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DropDownMenuKit: 0acbd983fefac6718b1df209198ba6336c3e2772
   FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
   FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
+  GooglePlacePicker: 665f39f931f2df32f9dd3fcc45f7e8abf71e535c
   GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
@@ -54,6 +67,6 @@ SPEC CHECKSUMS:
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftyDrop: 785f95aabc26c4d832576bb78dc4ba7d0594a95b
 
-PODFILE CHECKSUM: 3494c3e6c79d2c608e36832b9a41fdeba1ade854
+PODFILE CHECKSUM: 3ed4c0742affb36157bfda7b9b7b17151ae9da2e
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0

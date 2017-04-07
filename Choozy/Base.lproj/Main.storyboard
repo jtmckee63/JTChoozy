@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lQ4-pH-DbP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lQ4-pH-DbP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,20 +78,40 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nUA-44-dw4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2f-Wc-mNz">
+                                <rect key="frame" x="147" y="567" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="0iv-Jm-v0g"/>
+                                    <constraint firstAttribute="width" constant="80" id="FZo-x9-Vjb"/>
+                                </constraints>
+                                <state key="normal" image="cameraButtonV2"/>
+                            </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="P5a-FQ-LOa">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nUA-44-dw4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="G8h-Rh-uBx"/>
-                            <constraint firstItem="nUA-44-dw4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SzG-8u-88V"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nUA-44-dw4" secondAttribute="bottom" id="V9l-WD-1cg"/>
-                            <constraint firstAttribute="trailing" secondItem="nUA-44-dw4" secondAttribute="trailing" id="fJt-Ra-M0W"/>
+                            <constraint firstItem="P5a-FQ-LOa" firstAttribute="trailing" secondItem="nUA-44-dw4" secondAttribute="trailing" id="AYZ-B0-oJn"/>
+                            <constraint firstItem="nUA-44-dw4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="OYE-sJ-hhv"/>
+                            <constraint firstItem="P5a-FQ-LOa" firstAttribute="leading" secondItem="nUA-44-dw4" secondAttribute="leading" id="Siu-ai-OJz"/>
+                            <constraint firstAttribute="trailing" secondItem="nUA-44-dw4" secondAttribute="trailing" id="WHW-4g-ayT"/>
+                            <constraint firstItem="nUA-44-dw4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iHM-h5-t6l"/>
+                            <constraint firstAttribute="bottom" secondItem="Q2f-Wc-mNz" secondAttribute="bottom" constant="20" symbolic="YES" id="sJx-kr-H09"/>
+                            <constraint firstItem="Q2f-Wc-mNz" firstAttribute="centerX" secondItem="nUA-44-dw4" secondAttribute="centerX" id="w89-XS-aBl"/>
+                            <constraint firstItem="nUA-44-dw4" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="zS0-Ho-mlw"/>
+                            <constraint firstItem="P5a-FQ-LOa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="zwQ-6B-TV7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ylR-k8-Pw8"/>
                     <connections>
                         <outlet property="mapView" destination="nUA-44-dw4" id="Nar-Tl-AaR"/>
+                        <outlet property="newPostBigButton" destination="Q2f-Wc-mNz" id="rUY-L8-BVX"/>
+                        <outlet property="searchBar" destination="P5a-FQ-LOa" id="Ui4-RV-sSu"/>
                         <segue destination="RVE-4l-cVs" kind="presentation" identifier="login" modalTransitionStyle="coverVertical" id="XVN-MV-40c"/>
                         <segue destination="yOC-Ci-ztq" kind="show" identifier="detail" id="aFP-ZI-stg"/>
+                        <segue destination="6Ae-I3-skT" kind="show" identifier="places" id="Z5h-y4-ZL7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -188,7 +208,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lQ4-pH-DbP" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="wRW-Th-kPf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1T8-ae-fF8">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1T8-ae-fF8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -202,7 +222,11 @@
             <point key="canvasLocation" x="100" y="123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cameraButtonV2" width="122" height="122"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vp0-Iz-paG"/>
+        <segue reference="Z5h-y4-ZL7"/>
     </inferredMetricsTieBreakers>
 </document>

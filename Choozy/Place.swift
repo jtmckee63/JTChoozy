@@ -15,5 +15,7 @@ class Place: NSObject {
     var likelihood: Double?
     var address: String?
     var image: UIImage?
+    var latitude: Double?
+    var longitude: Double?
 
 }

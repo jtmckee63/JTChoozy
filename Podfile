@@ -11,5 +11,7 @@ pod 'SwiftyDrop', '~>3.0'
 pod 'Alamofire', '~> 4.0'
 pod 'AlamofireImage', '~> 3.1'
 pod 'GooglePlaces'
-
+pod 'GooglePlacePicker'
+pod 'GoogleMaps'
+pod 'DropDownMenuKit'
 end
