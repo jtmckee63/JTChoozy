@@ -11,11 +11,15 @@ import CoreLocation
 import MapKit
 import SwiftyDrop
 import Parse
+import Alamofire
 import AlamofireImage
+import SwiftyJSON
+import GooglePlaces
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate {
     
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet weak var placeSearchBar: UISearchBar!
     
     let locationManager = CLLocationManager()
     var postAnnotations:[PostAnnotation] = []
@@ -53,6 +57,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let refreshBarButtonItem = UIBarButtonItem(customView: refreshButton)
         
         self.navigationItem.setRightBarButtonItems([refreshBarButtonItem, newPostBarButtonItem], animated: false)
+        
+        //Search Bar
+        placeSearchBar.barTintColor = UIColor.blue.light
+        placeSearchBar.placeholder = "Pizza, Beer, Fun, etc..."
+        placeSearchBar.delegate = self
+        
+        //Gesture for Dismissing the Keyboard
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(gesture)
         
         if !isUserLoggedIn(){
             logout()
@@ -241,6 +254,70 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
     }
     
+    var searchPlaceAnnotations = [SearchPlaceAnnotation]()
+    func addSearchPlaceToMapView(searchPlace: SearchPlace){
+        
+        if let latitude = searchPlace.latitude, let longitude = searchPlace.longitude {
+            
+            let annotation = SearchPlaceAnnotation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            annotation.searchPlace = searchPlace
+            annotation.title = searchPlace.name
+            annotation.subtitle = searchPlace.address
+            
+            searchPlaceAnnotations.append(annotation)
+            
+            self.mapView.showAnnotations(self.searchPlaceAnnotations, animated: true)
+        }
+    }
+    
+    func removeSearchPlacesFromMapView(){
+        self.mapView.removeAnnotations(searchPlaceAnnotations)
+        searchPlaceAnnotations.removeAll()
+    }
+
+    
+    func searchForPlaces(for keyword: String){
+        
+        removeSearchPlacesFromMapView()
+        
+        //Google Places returns an error for spaces in the Request URL
+        let trimmedKeyword = keyword.replacingOccurrences(of: " ", with: "")
+        
+        let apiKey = "AIzaSyAO54B6oPO_SQGxlMIGzC8e0Khj3Dsy_no"
+        let meters = "15000"
+        
+        getUserLocation({(location) in
+            
+            let latitude = location.latitude
+            let longitude = location.longitude
+//            let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=\(meters)&type=restaurant&keyword=\(keyword)&key=\(apiKey)"
+            let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=\(meters)&keyword=\(trimmedKeyword)&key=\(apiKey)"
+            
+            Alamofire.request(urlString, method: .get).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    
+                    let json = JSON(value)
+              
+                    for (_, json):(String, JSON) in json["results"] {
+                        
+                        var place = SearchPlace()
+                        place.name = json["name"].string
+                        place.latitude = json["geometry"]["location"]["lat"].double
+                        place.longitude = json["geometry"]["location"]["lng"].double
+                        place.id = json["place_id"].string
+                        place.address = json["vicinity"].string
+                        
+                        self.addSearchPlaceToMapView(searchPlace: place)
+                    }
+
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        })
+    }
+    
     
     //MARK: MapKit Delegate Methods
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -254,6 +331,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             let post = postAnnotation.post
             
             self.showDetailController(post)
+        }
+        
+        if (view.annotation?.isKind(of: SearchPlaceAnnotation.self))!{
+            let searchPlaceAnnotation = view.annotation as! SearchPlaceAnnotation
+            let searchPlace = searchPlaceAnnotation.searchPlace
+            
+            if let placeId = searchPlace.id, let placeName = searchPlace.name {
+                self.showPlaceController(placeId, placeName: placeName)
+            }
         }
     }
     
@@ -294,7 +380,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             annotationView?.canShowCallout = true
         }
         
+        if let searchPlaceAnnotation = annotationView?.annotation as? SearchPlaceAnnotation{
+            
+            let searchPlace = searchPlaceAnnotation.searchPlace
+            
+            guard let placeId = searchPlace.id else{
+                return nil
+            }
+            
+            let postImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            postImageView.layer.cornerRadius = postImageView.frame.width / 2
+            postImageView.clipsToBounds = true
+            
+            self.loadPhotoForPlace(with: placeId, completion: {(photo) in
+                postImageView.image = photo
+            })
+        
+            annotationView?.leftCalloutAccessoryView = postImageView
+            annotationView?.image = UIImage(named: "pin2")
+            annotationView?.canShowCallout = true
+        }
+        
         return annotationView
+    }
+    
+    func loadPhotoForPlace(with id: String, completion: @escaping (UIImage) -> ()){
+        GMSPlacesClient.shared().lookUpPhotos(forPlaceID: id) { (photos, error) -> Void in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else {
+                if let firstPhoto = photos?.results.first {
+                    GMSPlacesClient.shared().loadPlacePhoto(firstPhoto, callback: { (photo, error) -> Void in
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                        } else {
+                            completion(photo!)
+                        }
+                    })
+                }
+            }
+        }
     }
     
     //MARK: - MapView Helpers
@@ -324,17 +449,41 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         mapView.setRegion(region, animated: true)
     }
     
+    //MARK: - SearchBar Delegate
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            removeSearchPlacesFromMapView()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
+        if let keyword = searchBar.text {
+            searchForPlaces(for: keyword)
+        }
+        
+        dismissKeyboard()
+    }
+ 
+    func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
     //MARK: - Navigation Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail"{
-            
             let detailController: DetailController = segue.destination as! DetailController
             detailController.post = (sender as? Post)!
-            
-            let backItem = UIBarButtonItem()
-            backItem.title = ""
-            navigationItem.backBarButtonItem = backItem
         }
+        
+        if segue.identifier == "places"{
+            let placeController: PlaceController = segue.destination as! PlaceController
+            placeController.place = sender as? (String, String)
+        }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        navigationItem.backBarButtonItem = backItem
     }
     
     
@@ -372,6 +521,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         UIApplication.shared.registerUserNotificationSettings(settings)
         UIApplication.shared.registerForRemoteNotifications()
     }
-    
+}
 
+struct SearchPlace {
+    var name: String?
+    var latitude: Double?
+    var longitude: Double?
+    var id: String?
+    var address: String?
 }

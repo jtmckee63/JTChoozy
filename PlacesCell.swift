@@ -18,7 +18,9 @@ class PlacesCell: UITableViewCell {
         placesCollectionView.register(UINib(nibName: "PlaceImageCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         
         self.placesCollectionView.isScrollEnabled = true
-        self.placesCollectionView.backgroundColor = UIColor.blue.dark
+        self.placesCollectionView.backgroundColor = UIColor.blue.light
+        self.placesCollectionView.showsVerticalScrollIndicator = false
+        self.placesCollectionView.showsHorizontalScrollIndicator = false
         self.backgroundColor = UIColor.clear
     }
 }

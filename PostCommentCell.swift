@@ -17,10 +17,10 @@ class PostCommentCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.blue.light
         self.selectionStyle = .none
         
-        commentTextField.backgroundColor = UIColor.clear
+        commentTextField.backgroundColor = UIColor.blue.dark
         commentTextField.textColor = UIColor.white
         commentTextField.attributedPlaceholder = NSAttributedString(string:"Say something about this place...", attributes: [NSForegroundColorAttributeName: UIColor.white.flat.withAlphaComponent(0.7)])
         commentTextField.tintColor = UIColor.white.flat

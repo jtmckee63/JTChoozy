@@ -33,10 +33,10 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         
         //Background Color
-        self.view.backgroundColor = UIColor.blue.flat
+        self.view.backgroundColor = UIColor.blue.light
         
         //Post Table View
-        postTableView.backgroundColor = UIColor.clear
+        postTableView.backgroundColor = UIColor.blue.light
         postTableView.delegate = self
         postTableView.dataSource = self
         postTableView.separatorStyle = .none
@@ -319,7 +319,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         case 2:
             return 120
         case 3:
-            return 60 //90
+            return 70 //90
         default:
             return 80
         }
@@ -483,7 +483,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 }
             }
         }
-
     }
     
     //MARK: - ScrollView Delegate

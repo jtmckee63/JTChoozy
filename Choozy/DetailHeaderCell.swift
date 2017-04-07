@@ -25,7 +25,7 @@ class DetailHeaderCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.blue.extraDark
         self.selectionStyle = .none
         
         headerView.backgroundColor = UIColor.black.flat.withAlphaComponent(0.85)

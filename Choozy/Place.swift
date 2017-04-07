@@ -9,11 +9,9 @@
 import UIKit
 
 class Place: NSObject {
-    
     var id: String?
     var name: String?
     var likelihood: Double?
     var address: String?
     var image: UIImage?
-
 }

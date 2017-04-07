@@ -22,6 +22,8 @@ class CommentCell: UITableViewCell {
         self.backgroundColor = UIColor.blue.dark
         self.selectionStyle = .none
         
+        commentLabel.numberOfLines = 0
+        
         backgroundUnderlayView.backgroundColor = UIColor.blue.dark
     }
     

@@ -78,20 +78,32 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nUA-44-dw4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="htn-On-gxE">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="nCF-yu-vwy"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nUA-44-dw4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="G8h-Rh-uBx"/>
+                            <constraint firstItem="htn-On-gxE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Qyk-63-Ysc"/>
                             <constraint firstItem="nUA-44-dw4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="SzG-8u-88V"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nUA-44-dw4" secondAttribute="bottom" id="V9l-WD-1cg"/>
                             <constraint firstAttribute="trailing" secondItem="nUA-44-dw4" secondAttribute="trailing" id="fJt-Ra-M0W"/>
+                            <constraint firstItem="htn-On-gxE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gxu-pK-iE8"/>
+                            <constraint firstAttribute="trailing" secondItem="htn-On-gxE" secondAttribute="trailing" id="i2Y-au-aDE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ylR-k8-Pw8"/>
                     <connections>
                         <outlet property="mapView" destination="nUA-44-dw4" id="Nar-Tl-AaR"/>
+                        <outlet property="placeSearchBar" destination="htn-On-gxE" id="amg-bk-4H6"/>
                         <segue destination="RVE-4l-cVs" kind="presentation" identifier="login" modalTransitionStyle="coverVertical" id="XVN-MV-40c"/>
                         <segue destination="yOC-Ci-ztq" kind="show" identifier="detail" id="aFP-ZI-stg"/>
+                        <segue destination="6Ae-I3-skT" kind="show" identifier="places" id="aXP-5x-xUv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -126,11 +138,62 @@
                     <connections>
                         <outlet property="detailTableView" destination="AuX-oW-Tuj" id="WCI-Wa-Pou"/>
                         <segue destination="6Ae-I3-skT" kind="show" identifier="places" id="YJo-Qz-xWx"/>
+                        <segue destination="MyY-QV-61m" kind="show" identifier="profile" id="UQp-pP-XC4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZLr-ix-Bug" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1557.5999999999999" y="122.78860569715144"/>
+        </scene>
+        <!--Profile Controller-->
+        <scene sceneID="jnG-ct-qbL">
+            <objects>
+                <viewController id="MyY-QV-61m" customClass="ProfileController" customModule="Choozy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LSm-yw-fvB"/>
+                        <viewControllerLayoutGuide type="bottom" id="twf-Oq-QUV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WNg-pO-q6w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6QG-gh-9hV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zfq-FA-hRZ">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="nTh-uP-bdq">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6QG-gh-9hV" firstAttribute="leading" secondItem="WNg-pO-q6w" secondAttribute="leading" id="7Rd-Sb-JIU"/>
+                            <constraint firstAttribute="trailing" secondItem="6QG-gh-9hV" secondAttribute="trailing" id="Dke-6Q-4Um"/>
+                            <constraint firstItem="6QG-gh-9hV" firstAttribute="top" secondItem="WNg-pO-q6w" secondAttribute="top" id="UFx-n5-XaH"/>
+                            <constraint firstItem="twf-Oq-QUV" firstAttribute="top" secondItem="6QG-gh-9hV" secondAttribute="bottom" id="ZVl-zw-1OU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="profileCollectionView" destination="6QG-gh-9hV" id="r6c-K6-FAU"/>
+                        <segue destination="yOC-Ci-ztq" kind="show" identifier="detail" id="waO-7f-37L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pbh-du-SgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2509.5999999999999" y="-181.25937031484258"/>
         </scene>
         <!--Place Controller-->
         <scene sceneID="vxm-a4-r81">
@@ -180,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOd-cL-h54" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2342" y="123"/>
+            <point key="canvasLocation" x="2510" y="492"/>
         </scene>
         <!--Map-->
         <scene sceneID="Y3x-ee-EAi">
@@ -203,6 +266,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vp0-Iz-paG"/>
+        <segue reference="aXP-5x-xUv"/>
+        <segue reference="aFP-ZI-stg"/>
     </inferredMetricsTieBreakers>
 </document>

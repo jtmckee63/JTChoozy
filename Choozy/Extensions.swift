@@ -242,8 +242,10 @@ extension UIColor{
     }
     
     struct blue{
+        static let extraDark = UIColor(r: 35, g: 93, b: 130)
         static let dark = UIColor(r: 41, g: 128, b: 185)
         static let flat = UIColor(r: 52, g: 152, b: 219)
+        static let light = UIColor(r: 100, g: 181, b: 236)
     }
     
     struct purple{
@@ -435,17 +437,13 @@ extension UIViewController{
     func showLicensesController(){
         self.performSegue(withIdentifier: "licenses", sender: nil)
     }
-//    
-//    func showProfileController(_ user: SpottyUser){
-//        self.performSegue(withIdentifier: "profile", sender: user)
-//    }
-//    
     
+    func showProfileController(_ user: ChoozyUser){
+        self.performSegue(withIdentifier: "profile", sender: user)
+    }
     
     func showPlaceController(_ placeId: String, placeName: String){
-        
         let place = (placeId, placeName)
-        
         self.performSegue(withIdentifier: "places", sender: place)
     }
     

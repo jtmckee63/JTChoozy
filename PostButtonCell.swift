@@ -16,6 +16,6 @@ class PostButtonCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.backgroundColor = UIColor.blue.dark
+        self.backgroundColor = UIColor.blue.extraDark
     }
 }

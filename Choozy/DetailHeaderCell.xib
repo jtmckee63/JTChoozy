@@ -48,27 +48,40 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faW-ss-P4A" customClass="ChoozyPlaceLabel" customModule="Choozy" customModuleProvider="target">
-                                <rect key="frame" x="70" y="35" width="295" height="20"/>
+                                <rect key="frame" x="92" y="35" width="273" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="wl9-Z3-cks"/>
+                                    <constraint firstAttribute="height" constant="20" id="Ee7-R4-LO7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAN-80-SLd">
+                                <rect key="frame" x="75" y="39" width="12" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="12" id="7EG-5I-jWE"/>
+                                    <constraint firstAttribute="width" secondItem="ZAN-80-SLd" secondAttribute="height" multiplier="1:1" id="M2p-yK-iYl"/>
+                                    <constraint firstAttribute="height" constant="12" id="wDM-Ji-zwE"/>
+                                </constraints>
+                                <state key="normal" image="zoomToLocationIcon"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZAN-80-SLd" firstAttribute="leading" secondItem="OrK-cW-ucP" secondAttribute="trailing" constant="15" id="0EH-YL-M3A"/>
                             <constraint firstItem="OmQ-vi-aFK" firstAttribute="leading" secondItem="OrK-cW-ucP" secondAttribute="trailing" constant="10" id="0HC-R9-p6T"/>
-                            <constraint firstItem="faW-ss-P4A" firstAttribute="leading" secondItem="OrK-cW-ucP" secondAttribute="trailing" constant="10" id="5aL-AN-MwD"/>
+                            <constraint firstAttribute="bottom" secondItem="faW-ss-P4A" secondAttribute="bottom" constant="15" id="4Wk-0m-bSz"/>
+                            <constraint firstAttribute="trailing" secondItem="faW-ss-P4A" secondAttribute="trailing" constant="10" id="4dJ-fT-gbj"/>
                             <constraint firstItem="OrK-cW-ucP" firstAttribute="leading" secondItem="nO8-5J-EIt" secondAttribute="leading" constant="10" id="6z9-fh-aJY"/>
+                            <constraint firstItem="faW-ss-P4A" firstAttribute="top" secondItem="OmQ-vi-aFK" secondAttribute="bottom" constant="5" id="7TT-Wk-LL0"/>
                             <constraint firstAttribute="height" constant="70" id="9FG-Tj-Zmo"/>
                             <constraint firstItem="OrK-cW-ucP" firstAttribute="top" secondItem="nO8-5J-EIt" secondAttribute="top" constant="10" id="Jbv-QS-Nzi"/>
-                            <constraint firstItem="faW-ss-P4A" firstAttribute="top" secondItem="OmQ-vi-aFK" secondAttribute="bottom" constant="5" id="Lda-HP-HiS"/>
-                            <constraint firstAttribute="trailing" secondItem="faW-ss-P4A" secondAttribute="trailing" constant="10" id="ctZ-ew-imb"/>
+                            <constraint firstItem="faW-ss-P4A" firstAttribute="leading" secondItem="ZAN-80-SLd" secondAttribute="trailing" constant="5" id="Tq2-YK-gYd"/>
+                            <constraint firstItem="faW-ss-P4A" firstAttribute="leading" secondItem="ZAN-80-SLd" secondAttribute="trailing" constant="5" id="aoc-ON-CBr"/>
+                            <constraint firstItem="ZAN-80-SLd" firstAttribute="top" secondItem="OmQ-vi-aFK" secondAttribute="bottom" constant="9" id="nyJ-kw-7ue"/>
                             <constraint firstAttribute="trailing" secondItem="OmQ-vi-aFK" secondAttribute="trailing" constant="10" id="oXD-gx-lXh"/>
                             <constraint firstItem="OmQ-vi-aFK" firstAttribute="top" secondItem="nO8-5J-EIt" secondAttribute="top" constant="10" id="qUs-UR-pBK"/>
-                            <constraint firstItem="faW-ss-P4A" firstAttribute="top" secondItem="OmQ-vi-aFK" secondAttribute="bottom" constant="5" id="uDv-tx-PXR"/>
+                            <constraint firstAttribute="bottom" secondItem="ZAN-80-SLd" secondAttribute="bottom" constant="19" id="xlp-Kn-xQR"/>
                             <constraint firstAttribute="bottom" secondItem="OrK-cW-ucP" secondAttribute="bottom" constant="10" id="zO7-1Q-N4T"/>
                         </constraints>
                     </view>
@@ -182,5 +195,6 @@
         <image name="commentIcon" width="16" height="17"/>
         <image name="likeIcon" width="16" height="16"/>
         <image name="viewsIcon" width="16" height="17"/>
+        <image name="zoomToLocationIcon" width="22" height="22"/>
     </resources>
 </document>

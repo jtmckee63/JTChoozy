@@ -28,6 +28,7 @@ PODS:
     - Parse (~> 1.9)
   - SCLAlertView (0.7.0)
   - SwiftyDrop (3.0.3)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - ParseUI
   - SCLAlertView
   - SwiftyDrop (~> 3.0)
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -53,7 +55,8 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftyDrop: 785f95aabc26c4d832576bb78dc4ba7d0594a95b
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 3494c3e6c79d2c608e36832b9a41fdeba1ade854
+PODFILE CHECKSUM: 3e821e00cac58b35b72174f5bc579003f392d1b2
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0

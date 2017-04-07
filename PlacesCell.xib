@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,11 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6du-Os-CM2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                        <rect key="frame" x="5" y="5" width="310" height="75"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Lwp-r6-qpx">
                             <size key="itemSize" width="50" height="50"/>
@@ -30,10 +30,10 @@
                     </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6du-Os-CM2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0rY-yE-rtj"/>
-                    <constraint firstAttribute="bottom" secondItem="6du-Os-CM2" secondAttribute="bottom" id="U5j-zN-92G"/>
-                    <constraint firstAttribute="trailing" secondItem="6du-Os-CM2" secondAttribute="trailing" id="abs-Nh-Zxo"/>
-                    <constraint firstItem="6du-Os-CM2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="y5f-GU-PfR"/>
+                    <constraint firstItem="6du-Os-CM2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Nxk-oi-Owy"/>
+                    <constraint firstAttribute="trailing" secondItem="6du-Os-CM2" secondAttribute="trailing" constant="5" id="alU-WB-ubP"/>
+                    <constraint firstAttribute="bottom" secondItem="6du-Os-CM2" secondAttribute="bottom" id="ij7-e3-7W9"/>
+                    <constraint firstItem="6du-Os-CM2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="sL1-ka-SsU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

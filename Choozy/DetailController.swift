@@ -41,14 +41,14 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let shareBarButtonItem = UIBarButtonItem(customView: shareButton)
         
         self.navigationItem.setRightBarButtonItems([moreBarButtonItem, shareBarButtonItem], animated: false)
-        self.view.backgroundColor = UIColor.blue.dark
+        self.view.backgroundColor = UIColor.blue.light
         
         //Detail Table View
         detailTableView.delegate = self
         detailTableView.dataSource = self
         detailTableView.register(UINib(nibName: "DetailHeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         detailTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "commentCell")
-        detailTableView.backgroundColor = UIColor.blue.flat
+        detailTableView.backgroundColor = UIColor.blue.light
         detailTableView.separatorStyle = .none
         detailTableView.indicatorStyle = .white
         detailTableView.estimatedRowHeight = 70
@@ -227,9 +227,9 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 if let firstName = comment.author?.firstName, let lastName = comment.author?.lastName, let authorProfilePictureUrl = comment.author?.profilePictureUrl, let content = comment.comment, let timeStamp = comment.timeStamp{
                     
                     //Comment Strings
-                    let commentAuthorString = NSAttributedString(string: firstName + " " + lastName, attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 12.0)!])
-                    let commentContentString = NSAttributedString(string: content, attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 10.0)!])
-                    let commentTimeStampString = NSAttributedString(string: " - " +  getDateStringFromDate(timeStamp), attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 9.0)!])
+                    let commentAuthorString = NSAttributedString(string: firstName + " " + lastName, attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 13.0)!])
+                    let commentContentString = NSAttributedString(string: content, attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 12.0)!])
+                    let commentTimeStampString = NSAttributedString(string: " - " +  getDateStringFromDate(timeStamp), attributes: [NSForegroundColorAttributeName: UIColor.white.flat, NSFontAttributeName: UIFont.init(name: "Avenir-Heavy", size: 11.0)!])
                     
                     let commentString = NSMutableAttributedString()
                     commentString.append(commentAuthorString)
@@ -1025,16 +1025,16 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         })
     }
     
-//    //MARK: - Navigation Methods
+    //MARK: - Navigation Methods
     func goToProfileController(_ gesture: UITapGestureRecognizer){
         
         if let choozyImageView = gesture.view as? ChoozyUserImageView {
             if let user = choozyImageView.user{
-//                self.showProfileController(user)
+                self.showProfileController(user)
             }
         }else if let choozyLabel = gesture.view as? ChoozyUserLabel {
             if let user = choozyLabel.user{
-//                self.showProfileController(user)
+                self.showProfileController(user)
             }
         }
     }
@@ -1051,11 +1051,11 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if let choozyImageView = gesture.view as? ChoozyUserImageView {
             if let user = choozyImageView.user{
-//                self.showProfileController(user)
+                self.showProfileController(user)
             }
         }else if let choozyLabel = gesture.view as? ChoozyUserLabel {
             if let user = choozyLabel.user{
-//                self.showProfileController(user)
+                self.showProfileController(user)
             }
         }
     }
@@ -1074,12 +1074,9 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
         
         if segue.identifier == "profile" {
-//            let profileController: ProfileController = segue.destination as! ProfileController
-//            profileController.user = (sender as? SpottyUser)!
-//            
-//            let backItem = UIBarButtonItem()
-//            backItem.title = ""
-//            navigationItem.backBarButtonItem = backItem
+            let profileController: ProfileController = segue.destination as! ProfileController
+            profileController.user = (sender as? ChoozyUser)!
+            
         }
         
         let backItem = UIBarButtonItem()

@@ -205,7 +205,7 @@ enum Custom: DropStatable {
     var backgroundColor: UIColor? {
         switch self {
         case .fetching: return UIColor.blue.dark
-        case .complete: return UIColor.mint.flat
+        case .complete: return UIColor.blue.light
         case .empty: return UIColor.watermelon.dark
         case .error: return UIColor.watermelon.dark
         }

@@ -164,7 +164,6 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
                 }
             }
         }
-        
     }
 
     //MARK: - Collection View Delegate & DataSource

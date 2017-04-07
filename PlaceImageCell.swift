@@ -16,7 +16,10 @@ class PlaceImageCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.contentMode = .scaleAspectFit
+        self.backgroundColor = UIColor.blue.dark
+        
+        placeImageView.contentMode = .scaleAspectFit
+        placeLabel.numberOfLines = 0
         
         // Initialization code
     }
