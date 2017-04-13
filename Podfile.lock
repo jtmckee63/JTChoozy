@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.2.0)
+  - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Bolts (1.8.4):
@@ -8,14 +8,16 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSDKCoreKit (4.18.0):
+  - BTNavigationDropdownMenu (0.4.1)
+  - DropDownMenuKit (0.8.2)
+  - FBSDKCoreKit (4.21.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.18.0):
+  - FBSDKLoginKit (4.21.0):
     - FBSDKCoreKit
-  - GoogleMaps/Base (2.1.1)
-  - GooglePlaces (2.1.1):
-    - GoogleMaps/Base (= 2.1.1)
-  - Parse (1.14.2):
+  - GoogleMaps/Base (2.2.0)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
+  - Parse (1.14.4):
     - Bolts/Tasks (~> 1.8)
   - ParseFacebookUtilsV4 (1.11.1):
     - Bolts/Tasks (>= 1.6)
@@ -33,6 +35,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
+  - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
+  - DropDownMenuKit
   - FBSDKCoreKit (~> 4.18)
   - GooglePlaces
   - Parse
@@ -42,21 +46,33 @@ DEPENDENCIES:
   - SwiftyDrop (~> 3.0)
   - SwiftyJSON
 
+EXTERNAL SOURCES:
+  BTNavigationDropdownMenu:
+    :branch: swift-3.0
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
+
+CHECKOUT OPTIONS:
+  BTNavigationDropdownMenu:
+    :commit: 2c08c8579cf7a53ecb3dbf578e6e1034080a9859
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
+
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
-  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
-  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
-  GooglePlaces: 35636d86e5020cba3856eb988c09a5491de0a65a
-  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
+  DropDownMenuKit: 0acbd983fefac6718b1df209198ba6336c3e2772
+  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
+  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  Parse: b0aa91d2c435e53d4a9af26e741e014c9b35c42e
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftyDrop: 785f95aabc26c4d832576bb78dc4ba7d0594a95b
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 3e821e00cac58b35b72174f5bc579003f392d1b2
+PODFILE CHECKSUM: cef8ed2750b11cb9a2dc918d36f203d674dcf0eb
 
 COCOAPODS: 1.2.0

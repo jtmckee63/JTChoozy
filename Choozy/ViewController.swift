@@ -15,6 +15,8 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 import GooglePlaces
+import DropDownMenuKit
+import BTNavigationDropdownMenu
 
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate {
     
@@ -24,10 +26,81 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     let locationManager = CLLocationManager()
     var postAnnotations:[PostAnnotation] = []
     
+    @IBOutlet weak var selectedCellLabel: UILabel!
+    var menuView: BTNavigationDropdownMenu!
+    
+    @IBOutlet weak var bigButtonPost: UIButton!
+    //DropDownMenuKit JT
+//    var titleView: DropDownTitleView!
+//    @IBOutlet var navigationBarMenu: DropDownMenu!
+//    @IBOutlet var toolbarMenu: DropDownMenu!
+    
+    //colors JT
+    var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
+    var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+    var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+    var black: UIColor = UIColor.black
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Choozy"
+        //DropDownMenuKit JT
+//        let title = prepareNavigationBarMenuTitleView()
+//        
+//        prepareNavigationBarMenu(title)
+//        prepareToolbarMenu()
+//        updateMenuContentOffsets()
+        
+        let items = ["Eat", "Drink", "Play", "Post"]
+//        self.selectedCellLabel.text = "Choozy"
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.barTintColor = black
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items as [AnyObject])
+        menuView.cellHeight = 50
+        menuView.cellBackgroundColor = self.navigationController?.navigationBar.barTintColor
+        menuView.cellSelectionColor = lightGreen
+        menuView.shouldKeepSelectedCellColor = true
+        menuView.cellTextLabelColor = UIColor.white
+        menuView.cellTextLabelFont = UIFont(name: "Avenir-Heavy", size: 17)
+        menuView.cellTextLabelAlignment = .center // .left // .Right // .Left
+        menuView.arrowPadding = 15
+        menuView.animationDuration = 0.5
+        menuView.maskBackgroundColor = UIColor.black
+        menuView.maskBackgroundOpacity = 0.3
+        menuView.didSelectItemAtIndexHandler = {(indexPath: Int) -> () in
+            print("Did select item at index: \(indexPath)")
+            
+            if indexPath == 0 {
+                print("slected Eat")
+                self.mapView.removeAnnotations(self.postAnnotations)
+
+                let keyword = "Eat"
+                self.searchForPlaces(for: keyword)
+            }
+            if indexPath == 1 {
+                print("selected Drink")
+                self.mapView.removeAnnotations(self.postAnnotations)
+
+                let keyword = "Bars"
+                self.searchForPlaces(for: keyword)
+            }
+            if indexPath == 2 {
+                print("selected Play")
+                self.mapView.removeAnnotations(self.postAnnotations)
+
+                let keyword = "Entertainment"
+                self.searchForPlaces(for: keyword)
+            }
+            if indexPath == 3 {
+                self.removeSearchPlacesFromMapView()
+                self.refreshAllData()
+            }
+
+        }
+        
+        self.navigationItem.titleView = menuView
         
         //Bar Button Items
         let settingsButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
@@ -50,6 +123,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         newPostButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
         let newPostBarButtonItem = UIBarButtonItem(customView: newPostButton)
         
+        //JT Added for new big button post
+        bigButtonPost.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
+        
         let refreshButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
         refreshButton.contentMode = .scaleAspectFill
         refreshButton.setImage(UIImage(named: "refreshIcon"), for: .normal)
@@ -59,7 +135,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.navigationItem.setRightBarButtonItems([refreshBarButtonItem, newPostBarButtonItem], animated: false)
         
         //Search Bar
-        placeSearchBar.barTintColor = UIColor.blue.light
+        placeSearchBar.barTintColor = black
         placeSearchBar.placeholder = "Pizza, Beer, Fun, etc..."
         placeSearchBar.delegate = self
         
@@ -73,6 +149,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             refreshAllData()
         }
     }
+
+    
+    //JT added
+    override func viewDidAppear(_ animated: Bool) {
+        //added JT
+        super.viewDidAppear(animated)
+//        navigationBarMenu.container = view
+//        toolbarMenu.container = view
+//        
+//        //added JT
+//        self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true);
+    }
+    //JT ended
     
     func logout(){
         ChoozyUser.logOut()
@@ -317,6 +406,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             }
         })
     }
+    //added JT
+    //annotations and adding click options
+    func openMapsAppWithDirections(to coordinate: CLLocationCoordinate2D, destinationName name: String) {
+        let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = name // Provide the name of the destination in the To: field
+        mapItem.openInMaps(launchOptions: options)
+    }
+    //JT ended
     
     
     //MARK: MapKit Delegate Methods
@@ -327,19 +426,54 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         navigationItem.backBarButtonItem = backItem
         
         if (view.annotation?.isKind(of: PostAnnotation.self))!{
-            let postAnnotation = view.annotation as! PostAnnotation
-            let post = postAnnotation.post
-            
-            self.showDetailController(post)
+//            //Cam Code -start-
+//            let postAnnotation = view.annotation as! PostAnnotation
+//            let post = postAnnotation.post
+//            //Cam Code -end-
+            //JT added for differnt annotation buttons
+            if control == view.leftCalloutAccessoryView {
+                if let annotation = view.annotation {
+                    // Unwrap the double-optional annotation.title property or
+                    // name the destination "Unknown" if the annotation has no title
+                    let destinationName = (annotation.title ?? nil) ?? "Unknown"
+                    openMapsAppWithDirections(to: annotation.coordinate, destinationName: destinationName)
+                }
+            }
+
+            if control == view.rightCalloutAccessoryView {
+                let postAnnotation = view.annotation as! PostAnnotation
+                let post = postAnnotation.post
+                self.showDetailController(post)
+            }
+            //JT end
+            //JT comment out cam code
+//            self.showDetailController(post)
         }
         
         if (view.annotation?.isKind(of: SearchPlaceAnnotation.self))!{
-            let searchPlaceAnnotation = view.annotation as! SearchPlaceAnnotation
-            let searchPlace = searchPlaceAnnotation.searchPlace
+            //JT comment Cam Code
+//            let searchPlaceAnnotation = view.annotation as! SearchPlaceAnnotation
+//            let searchPlace = searchPlaceAnnotation.searchPlace
             
-            if let placeId = searchPlace.id, let placeName = searchPlace.name {
-                self.showPlaceController(placeId, placeName: placeName)
+            if control == view.leftCalloutAccessoryView {
+                if let annotation = view.annotation {
+                    // Unwrap the double-optional annotation.title property or
+                    // name the destination "Unknown" if the annotation has no title
+                    let destinationName = (annotation.title ?? nil) ?? "Unknown"
+                    openMapsAppWithDirections(to: annotation.coordinate, destinationName: destinationName)
+                }
             }
+            if control == view.rightCalloutAccessoryView {
+                let searchPlaceAnnotation = view.annotation as! SearchPlaceAnnotation
+                let searchPlace = searchPlaceAnnotation.searchPlace
+                if let placeId = searchPlace.id, let placeName = searchPlace.name {
+                    self.showPlaceController(placeId, placeName: placeName)
+                }
+            }
+//            JT comment out cam code
+//            if let placeId = searchPlace.id, let placeName = searchPlace.name {
+//                self.showPlaceController(placeId, placeName: placeName)
+//            }
         }
     }
     
@@ -357,48 +491,85 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             annotationView?.annotation = annotation
         }
         else {
+            //JT comment cam code
+//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+//            
+//            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.detailDisclosure) as UIButton
+            //JT Code -start-
+            let smallSquare = CGSize(width: 30, height: 30)
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+
+            let rightButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
+            rightButton.tintColor = UIColor.red
+            rightButton.setBackgroundImage(UIImage(named: "ChoozyOut"), for: UIControlState())
+            annotationView?.rightCalloutAccessoryView = rightButton
+            //JT Code -start-
         }
         
         if let postAnnotation = annotationView?.annotation as? PostAnnotation{
             
             let post = postAnnotation.post
             
-            guard let mediaUrl = post.mediaUrl else{
-                return nil
-            }
+            //JT comment cam code
+//            guard let mediaUrl = post.mediaUrl else{
+//                return nil
+//            }
+//            
+//            annotationView?.image = UIImage(named: "pin")
+//            
+//            let postImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//            
+//            postImageView.af_setImage(withURL: URL(string: mediaUrl)!, placeholderImage: UIImage(named: "person"), filter: AspectScaledToFillSizeCircleFilter(size: postImageView.frame.size), imageTransition: .crossDissolve(0.1))
+//            
+//            
+//            annotationView?.leftCalloutAccessoryView = postImageView
             
+            
+            //JT Code -start-
+            let smallSquare = CGSize(width: 30, height: 30)
             annotationView?.image = UIImage(named: "pin")
-            
-            let postImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            
-            postImageView.af_setImage(withURL: URL(string: mediaUrl)!, placeholderImage: UIImage(named: "person"), filter: AspectScaledToFillSizeCircleFilter(size: postImageView.frame.size), imageTransition: .crossDissolve(0.1))
-            
-            
-            annotationView?.leftCalloutAccessoryView = postImageView
+
+
+            let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
+            button.setBackgroundImage(UIImage(named: "CarIcon"), for: UIControlState())
+            annotationView?.leftCalloutAccessoryView = button
             annotationView?.canShowCallout = true
+            //JT Code -end-
+
+            //right button annotation
+            
         }
         
         if let searchPlaceAnnotation = annotationView?.annotation as? SearchPlaceAnnotation{
-            
+            //JT comment cam code
             let searchPlace = searchPlaceAnnotation.searchPlace
+//
+//            guard let placeId = searchPlace.id else{
+//                return nil
+//            }
+//
+//            let postImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+//            postImageView.layer.cornerRadius = postImageView.frame.width / 2
+//            postImageView.clipsToBounds = true
+//            
+//            self.loadPhotoForPlace(with: placeId, completion: {(photo) in
+//                postImageView.image = photo
+//            })
+//        
+//            annotationView?.leftCalloutAccessoryView = postImageView
+//            annotationView?.image = UIImage(named: "pin2")
+//            annotationView?.canShowCallout = true
+            //JT Code -start-
+            let smallSquare = CGSize(width: 30, height: 30)
             
-            guard let placeId = searchPlace.id else{
-                return nil
-            }
-            
-            let postImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-            postImageView.layer.cornerRadius = postImageView.frame.width / 2
-            postImageView.clipsToBounds = true
-            
-            self.loadPhotoForPlace(with: placeId, completion: {(photo) in
-                postImageView.image = photo
-            })
-        
-            annotationView?.leftCalloutAccessoryView = postImageView
+            let button = UIButton(frame: CGRect(origin: CGPoint.zero, size: smallSquare))
+            button.setBackgroundImage(UIImage(named: "CarIcon"), for: UIControlState())
+            annotationView?.leftCalloutAccessoryView = button
             annotationView?.image = UIImage(named: "pin2")
             annotationView?.canShowCallout = true
+            //JT Code -end-
+
         }
         
         return annotationView
@@ -521,6 +692,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         UIApplication.shared.registerUserNotificationSettings(settings)
         UIApplication.shared.registerForRemoteNotifications()
     }
+    
 }
 
 struct SearchPlace {

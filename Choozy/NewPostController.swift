@@ -29,6 +29,13 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     var hasTakenPhoto = Bool()
     var commentContent = String()
     
+    //JT added for video
+    @IBOutlet var mediaView: UIView!
+    var moviePlayerController = MPMoviePlayerController()
+    var defaultCameraImage = UIImage(named: "cameraImage")
+
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +52,9 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         postTableView.register(UINib(nibName: "PlacesCell", bundle: nil), forCellReuseIdentifier: "placesCell")
         postTableView.register(UINib(nibName: "PostCommentCell", bundle: nil), forCellReuseIdentifier: "postCommentCell")
         postTableView.register(UINib(nibName: "PostButtonCell", bundle: nil), forCellReuseIdentifier: "postButtonCell")
-        
+        postTableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageViewTapped)))
+        postTableView.isUserInteractionEnabled = true
+        postTableView.contentMode = .scaleAspectFill
         
         //Set Default Variables
         hasTakenPhoto = false
@@ -62,8 +71,14 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         //Open the Camera
         openCamera()
         
+        
     }
     
+    func handleImageViewTapped() {
+        if postImage == defaultCameraImage{
+            openCamera()
+        }
+    }
     
     func createPost(_ postButton: UIButton){
         if !commentContent.isEmpty{
@@ -75,14 +90,30 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 postButton.isEnabled = false
                 
                 let takenLocation = locationManager.getCurrentLocationCoordinates()
+
                 
                 getLocationDictionary(location: CLLocation(latitude: takenLocation.latitude, longitude: takenLocation.longitude),
                                       completion:({(location) in
                                         
                                         let randomPostId = UUID().uuidString
+                                        
+                                        //JT comment out cam code
                                         let mediaData = UIImageJPEGRepresentation(self.postImage, 0.8)!
                                         
-                                        let postMedia = PFFile(name: "post_" + randomPostId + ".jpeg", data: mediaData)
+                                        var postMedia = PFFile(name: "post_" + randomPostId + ".jpeg", data: mediaData)
+                                        
+                                        if self.selectedMovieURL != nil{
+                                            if let postURL = self.selectedMovieURL{
+                                                let mediaData = try! Data(contentsOf: postURL)
+                                                postMedia = PFFile(name: "post_" + randomPostId + ".mov", data: mediaData)
+                                            }
+                                            
+                                        }else{
+                                            let mediaData = UIImageJPEGRepresentation(self.postImage, 0.8)!
+                                            
+                                            postMedia = PFFile(name: "post_" + randomPostId + ".jpeg", data: mediaData)
+                                        }
+                                        
                                         postMedia?.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
                                             
                                             if let error = error{
@@ -341,36 +372,112 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             picker.view.frame = self.view.bounds
             picker.delegate = self
             picker.sourceType = UIImagePickerControllerSourceType.camera
-            picker.mediaTypes = [kUTTypeImage as String]
+            picker.mediaTypes = [kUTTypeMovie as String, kUTTypeImage as String]
             picker.allowsEditing = true
             self.view.addSubview(picker.view)
             present(picker, animated: true, completion: nil)
         }
     }
-    
+    var selectedMovieURL: URL?
+    var selectedImageFromPicker: UIImage?
     //MARK: - UIImagePickerController Delegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        guard let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage else{
+        guard let mediaType = info[UIImagePickerControllerMediaType] as? String else{
             return
         }
         
-        originalImage = editedImage
-        postImage = editedImage
-        
-        picker.view.fadeOut()
-        
-        hasTakenPhoto = true
-        
-        //Reload the Table View
-        postTableView.reloadData()
-        
-        //Find Places
-        getSuggestedPlaces()
+        if mediaType.contains("movie"){
+            
+            if let movieURL = info["UIImagePickerControllerMediaURL"] as? URL{
+                selectedMovieURL = movieURL
+            }
+            
+            if let selectedMovie = selectedMovieURL{
+                            
+                self.moviePlayerController = MPMoviePlayerController(contentURL: selectedMovie)
+                if let player = self.moviePlayerController as? MPMoviePlayerController{
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.startStopMoviePlayer))
+                    
+                    
+                    //self.dismiss(animated: true, completion: {(complete) in
+                    picker.view.fadeOut()
+                    
+                    hasTakenPhoto = true
+                    
+                    //Reload the Table View
+                    postTableView.reloadData()
+                    
+                    //Find Places
+                    getSuggestedPlaces()
+                     
+                    player.view.frame = self.postTableView.bounds
+                    player.scalingMode = .aspectFill
+                    player.isFullscreen = false
+                    player.controlStyle = .none
+                    player.repeatMode = .one
+                    player.view.isUserInteractionEnabled = true
+                    player.view.addGestureRecognizer(tapGesture)
+                    self.view.addSubview(player.view)
+                    self.postTableView.addSubview(player.view)
+
+                    player.prepareToPlay()
+                    
+                    
+                    
+                    //})
+                }
+            }
+
+        } else {
+            guard let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage else{
+                        return
+            }
+            originalImage = editedImage
+            postImage = editedImage
+    
+            picker.view.fadeOut()
+    
+            hasTakenPhoto = true
+    
+            //Reload the Table View
+            postTableView.reloadData()
+            
+            //Find Places
+            getSuggestedPlaces()
+        }
+
+//        guard let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage else{
+//            return
+//        }
+//        
+//        originalImage = editedImage
+//        postImage = editedImage
+//        
+//        picker.view.fadeOut()
+//        
+//        hasTakenPhoto = true
+//        
+//        //Reload the Table View
+//        postTableView.reloadData()
+//        
+//        //Find Places
+//        getSuggestedPlaces()
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    //JT added for video
+    func startStopMoviePlayer(){
+        if moviePlayerController.isPreparedToPlay{
+            if moviePlayerController.playbackState == .playing{
+                moviePlayerController.pause()
+            }else{
+                moviePlayerController.play()
+            }
+        }
     }
     
     //MARK: - Collection View Delegate & DataSource
