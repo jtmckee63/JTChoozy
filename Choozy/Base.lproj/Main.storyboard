@@ -115,6 +115,7 @@
                         <segue destination="RVE-4l-cVs" kind="presentation" identifier="login" modalTransitionStyle="coverVertical" id="XVN-MV-40c"/>
                         <segue destination="yOC-Ci-ztq" kind="show" identifier="detail" id="aFP-ZI-stg"/>
                         <segue destination="6Ae-I3-skT" kind="show" identifier="places" id="aXP-5x-xUv"/>
+                        <segue destination="MyY-QV-61m" kind="show" identifier="profile" id="RNe-j0-4cA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -280,7 +281,8 @@
         <image name="cameraButtonV2" width="122" height="122"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aXP-5x-xUv"/>
         <segue reference="aFP-ZI-stg"/>
+        <segue reference="aXP-5x-xUv"/>
+        <segue reference="RNe-j0-4cA"/>
     </inferredMetricsTieBreakers>
 </document>

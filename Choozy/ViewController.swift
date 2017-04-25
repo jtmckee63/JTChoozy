@@ -30,10 +30,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var menuView: BTNavigationDropdownMenu!
     
     @IBOutlet weak var bigButtonPost: UIButton!
-    //DropDownMenuKit JT
-//    var titleView: DropDownTitleView!
-//    @IBOutlet var navigationBarMenu: DropDownMenu!
-//    @IBOutlet var toolbarMenu: DropDownMenu!
+
     
     //colors JT
     var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
@@ -43,13 +40,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //DropDownMenuKit JT
-//        let title = prepareNavigationBarMenuTitleView()
-//        
-//        prepareNavigationBarMenu(title)
-//        prepareToolbarMenu()
-//        updateMenuContentOffsets()
         
         let items = ["Eat", "Drink", "Play", "Post"]
 //        self.selectedCellLabel.text = "Choozy"
@@ -105,8 +95,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //Bar Button Items
         let settingsButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
         settingsButton.contentMode = .scaleAspectFill
-        settingsButton.setImage(UIImage(named: "settingsIcon"), for: .normal)
-        settingsButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        settingsButton.setImage(UIImage(named: "person"), for: .normal)
+        settingsButton.addTarget(self, action: #selector(goToProfileController), for: .touchUpInside)
         let settingsBarButtonItem = UIBarButtonItem(customView: settingsButton)
         
         let selectionButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
@@ -651,6 +641,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             let placeController: PlaceController = segue.destination as! PlaceController
             placeController.place = sender as? (String, String)
         }
+        if segue.identifier == "profile" {
+            let profileController: ProfileController = segue.destination as! ProfileController
+            profileController.user = (sender as? ChoozyUser)!
+            
+        }
         
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -663,7 +658,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             self.showPostController()
         }
     }
+    func goToProfileController(){
+        if isUserLoggedIn(){
+            print("inside goToProfileController()")
+            print(ChoozyUser.current()!)
+            let user = ChoozyUser.current()
+            print(user)
+//            self.showProfileController(user!)
+            self.performSegue(withIdentifier: "profile", sender: user)
+
+        }
+    }
     
+
     //MARK: - CoreLocation Helpers
     func getUserLocation(_ completion: @escaping (PFGeoPoint) -> ()){
         PFGeoPoint.geoPointForCurrentLocation(inBackground: {(location: PFGeoPoint?, error: Error?) -> Void in
