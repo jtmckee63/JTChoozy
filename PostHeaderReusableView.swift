@@ -12,6 +12,7 @@ class PostHeaderReusableView: UICollectionReusableView {
 
     @IBOutlet var headerImageView: UIImageView!
     
+    @IBOutlet var postButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         

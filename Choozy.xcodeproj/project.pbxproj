@@ -55,6 +55,7 @@
 		4CB9F0A11E7088D400113585 /* PostButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9F09F1E7088D400113585 /* PostButtonCell.swift */; };
 		4CB9F0A21E7088D400113585 /* PostButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F0A01E7088D400113585 /* PostButtonCell.xib */; };
 		4CD5AC8E1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5AC8D1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift */; };
+		AB2B42ED1EB27BEC002232EB /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B42EC1EB27BEC002232EB /* SettingsController.swift */; };
 		AB9F23B21E9AC16D006CAE50 /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F23B11E9AC16D006CAE50 /* MyAnnotation.swift */; };
 		FFF454188DEC9A7B13C0E898 /* Pods_Choozy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		4CB9F09F1E7088D400113585 /* PostButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostButtonCell.swift; sourceTree = "<group>"; };
 		4CB9F0A01E7088D400113585 /* PostButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostButtonCell.xib; sourceTree = "<group>"; };
 		4CD5AC8D1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceAnnotation.swift; sourceTree = "<group>"; };
+		AB2B42EC1EB27BEC002232EB /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		AB9F23B11E9AC16D006CAE50 /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
 		C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Choozy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Choozy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Choozy/Pods-Choozy.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				4C49FAB31E8CA6A2002D976A /* PlaceController.swift */,
 				4CB9F0861E6E32A500113585 /* NewPostController.swift */,
 				4C49FAB51E8CA6BC002D976A /* ProfileController.swift */,
+				AB2B42EC1EB27BEC002232EB /* SettingsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				4C49FAB41E8CA6A2002D976A /* PlaceController.swift in Sources */,
 				4C49FAB61E8CA6BC002D976A /* ProfileController.swift in Sources */,
 				4C49FA991E8C7261002D976A /* PostAnnotation.swift in Sources */,
+				AB2B42ED1EB27BEC002232EB /* SettingsController.swift in Sources */,
 				4C49FAA91E8C947B002D976A /* CommentCell.swift in Sources */,
 				4C49FAAC1E8C94AC002D976A /* CommentDetailButton.swift in Sources */,
 				4CB9F0991E6E415300113585 /* PlaceImageCell.swift in Sources */,

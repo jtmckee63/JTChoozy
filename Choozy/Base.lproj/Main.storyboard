@@ -116,11 +116,97 @@
                         <segue destination="yOC-Ci-ztq" kind="show" identifier="detail" id="aFP-ZI-stg"/>
                         <segue destination="6Ae-I3-skT" kind="show" identifier="places" id="aXP-5x-xUv"/>
                         <segue destination="MyY-QV-61m" kind="show" identifier="profile" id="RNe-j0-4cA"/>
+                        <segue destination="hbg-3N-6WK" kind="show" identifier="settings" id="ShA-sg-TTC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="836" y="110"/>
+        </scene>
+        <!--Settings Controller-->
+        <scene sceneID="nnu-Kr-yPL">
+            <objects>
+                <viewController id="hbg-3N-6WK" customClass="SettingsController" customModule="Choozy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FwY-ot-Eao"/>
+                        <viewControllerLayoutGuide type="bottom" id="AfE-Kn-YUI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XQf-Rc-Uvm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvV-Ws-kJU">
+                                <rect key="frame" x="62" y="267" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="zfG-4s-Piv"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-Wb-VQ0">
+                                <rect key="frame" x="62" y="469" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="USj-BN-q9X"/>
+                                </constraints>
+                                <state key="normal" title="About Choozy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0F-kp-gLN">
+                                <rect key="frame" x="62" y="370" width="250" height="50"/>
+                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="sgR-pl-jFR"/>
+                                </constraints>
+                                <state key="normal" title="Tutorial">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KyM-Yu-6Qd">
+                                <rect key="frame" x="127" y="91" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="j41-Hk-sv5"/>
+                                    <constraint firstAttribute="width" constant="120" id="nKP-Ff-D1Q"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choozy Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-Zj-GPA">
+                                <rect key="frame" x="114" y="588" width="146" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.048407458440000002" green="1" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="top" secondItem="mvV-Ws-kJU" secondAttribute="bottom" constant="53" id="0ar-iF-5Ad"/>
+                            <constraint firstItem="KyM-Yu-6Qd" firstAttribute="centerX" secondItem="XQf-Rc-Uvm" secondAttribute="centerX" id="D7b-kE-gE0"/>
+                            <constraint firstItem="i0d-Zj-GPA" firstAttribute="centerX" secondItem="6Hk-Wb-VQ0" secondAttribute="centerX" id="Gkw-Ro-3Nb"/>
+                            <constraint firstItem="KyM-Yu-6Qd" firstAttribute="top" secondItem="FwY-ot-Eao" secondAttribute="bottom" constant="27" id="KtF-RK-J6s"/>
+                            <constraint firstItem="AfE-Kn-YUI" firstAttribute="top" secondItem="i0d-Zj-GPA" secondAttribute="bottom" constant="59" id="M90-7s-uZU"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="XQf-Rc-Uvm" secondAttribute="leadingMargin" constant="46" id="RZO-UT-eIU"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="top" secondItem="KyM-Yu-6Qd" secondAttribute="bottom" constant="56" id="ULJ-uT-Uje"/>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="trailing" secondItem="6Hk-Wb-VQ0" secondAttribute="trailing" id="Ue0-KJ-u1M"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="p0F-kp-gLN" secondAttribute="leading" id="V8k-Th-Q99"/>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="leading" secondItem="6Hk-Wb-VQ0" secondAttribute="leading" id="adY-ph-LaH"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="trailing" secondItem="p0F-kp-gLN" secondAttribute="trailing" id="iJm-RF-FOa"/>
+                            <constraint firstItem="6Hk-Wb-VQ0" firstAttribute="top" secondItem="p0F-kp-gLN" secondAttribute="bottom" constant="49" id="rSX-Iq-NmQ"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="vbr-9v-ckt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="aboutButton" destination="6Hk-Wb-VQ0" id="bSu-oL-uwg"/>
+                        <outlet property="logoutButton" destination="mvV-Ws-kJU" id="fci-qJ-PUY"/>
+                        <outlet property="profilePic" destination="KyM-Yu-6Qd" id="hgA-5T-vyu"/>
+                        <outlet property="tutorialButton" destination="p0F-kp-gLN" id="lbM-RT-tdz"/>
+                        <segue destination="RVE-4l-cVs" kind="presentation" identifier="login" modalTransitionStyle="coverVertical" id="CNc-Gf-bIe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7VB-ib-bnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="850.39999999999998" y="831.63418290854577"/>
         </scene>
         <!--Detail Controller-->
         <scene sceneID="J7K-Y4-AgB">
@@ -281,8 +367,9 @@
         <image name="cameraButtonV2" width="122" height="122"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aFP-ZI-stg"/>
         <segue reference="aXP-5x-xUv"/>
+        <segue reference="aFP-ZI-stg"/>
         <segue reference="RNe-j0-4cA"/>
+        <segue reference="CNc-Gf-bIe"/>
     </inferredMetricsTieBreakers>
 </document>

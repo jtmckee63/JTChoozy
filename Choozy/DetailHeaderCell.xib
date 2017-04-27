@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,17 +16,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="374"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NSO-Hm-MEy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTk-d2-Egt">
+                        <rect key="frame" x="-1" y="-1.5" width="375" height="375.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="375" id="Jpl-5m-Jpe"/>
-                            <constraint firstAttribute="height" constant="375" id="KZE-o9-qaD"/>
-                            <constraint firstAttribute="width" secondItem="NSO-Hm-MEy" secondAttribute="height" multiplier="1:1" id="sOj-Be-aeT"/>
+                            <constraint firstAttribute="width" constant="375" id="CE6-Mg-JO7"/>
+                            <constraint firstAttribute="height" constant="375" id="ggG-XC-7k1"/>
+                            <constraint firstAttribute="width" secondItem="bTk-d2-Egt" secondAttribute="height" multiplier="1:1" id="yJ0-P4-KLB"/>
                         </constraints>
-                    </imageView>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nO8-5J-EIt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                         <subviews>
@@ -163,16 +164,14 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="NSO-Hm-MEy" secondAttribute="trailing" id="0Z5-bh-bgj"/>
-                    <constraint firstItem="NSO-Hm-MEy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0s5-wb-h1Z"/>
+                    <constraint firstItem="bTk-d2-Egt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-1" id="69R-m6-LQU"/>
                     <constraint firstItem="nO8-5J-EIt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="I9f-Om-F4R"/>
                     <constraint firstAttribute="trailing" secondItem="7e6-o8-cML" secondAttribute="trailing" id="ZqS-Qs-0UN"/>
                     <constraint firstAttribute="bottom" secondItem="7e6-o8-cML" secondAttribute="bottom" id="ary-NH-Axg"/>
-                    <constraint firstAttribute="bottom" secondItem="NSO-Hm-MEy" secondAttribute="bottom" id="bB0-kf-KRT"/>
                     <constraint firstItem="nO8-5J-EIt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bMf-1Y-gMB"/>
-                    <constraint firstItem="NSO-Hm-MEy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hSX-mG-lA9"/>
                     <constraint firstAttribute="trailing" secondItem="nO8-5J-EIt" secondAttribute="trailing" id="j7h-rY-IK3"/>
                     <constraint firstItem="7e6-o8-cML" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vJi-qJ-x2f"/>
+                    <constraint firstItem="bTk-d2-Egt" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="-1" id="zdh-Xu-Uea"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -184,7 +183,7 @@
                 <outlet property="headerView" destination="nO8-5J-EIt" id="Fa5-yC-ea3"/>
                 <outlet property="likePostButton" destination="W20-RV-vGH" id="G0J-nY-mpR"/>
                 <outlet property="likesLabel" destination="FDj-1e-6Lr" id="Q4V-TY-kNd"/>
-                <outlet property="postImageView" destination="NSO-Hm-MEy" id="b8z-tq-ufR"/>
+                <outlet property="mediaView" destination="bTk-d2-Egt" id="arM-FS-NMJ"/>
                 <outlet property="viewsImageView" destination="4aC-Wv-gf7" id="xXp-c1-MYm"/>
                 <outlet property="viewsLabel" destination="o0y-ud-ylC" id="xZf-R1-LhH"/>
             </connections>

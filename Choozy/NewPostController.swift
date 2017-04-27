@@ -38,13 +38,17 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     var selectedMovieURL: URL?
     var selectedImageFromPicker: UIImage?
     
+    var player = AVPlayer()
+    var playerLayer = AVPlayerLayer()
+    
+    
 
     //colors JT
     var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
     var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
     var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
     var black: UIColor = UIColor.black
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +65,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         postTableView.register(UINib(nibName: "PlacesCell", bundle: nil), forCellReuseIdentifier: "placesCell")
         postTableView.register(UINib(nibName: "PostCommentCell", bundle: nil), forCellReuseIdentifier: "postCommentCell")
         postTableView.register(UINib(nibName: "PostButtonCell", bundle: nil), forCellReuseIdentifier: "postButtonCell")
-        postTableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageViewTapped)))
+//        postTableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleImageViewTapped)))
         postTableView.isUserInteractionEnabled = true
         postTableView.contentMode = .scaleAspectFill
         
@@ -586,16 +590,19 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             
             if (hasTakenVideo == true){
+
                 let videoURL = selectedMovieURL
-                let player = AVPlayer(url: videoURL!)
-                let playerLayer = AVPlayerLayer(player: player)
+                self.player = AVPlayer(url: videoURL!)
+                self.playerLayer = AVPlayerLayer(player: player)
+
                 
-                playerLayer.frame = cell.mediaView.bounds
                 playerLayer.masksToBounds = true
                 player.allowsExternalPlayback = true
+                playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+
                 cell.layer.addSublayer(playerLayer)
-                player.play()
-                
+                playerLayer.frame = cell.mediaView.bounds
+
                 return cell
 
             }else {
@@ -605,7 +612,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 return cell
                 
             }
-            
 //            //cameron code
 //            postImageView.frame = cell.mediaView.bounds
 //            cell.mediaView.addSubview(postImageView)
@@ -642,6 +648,8 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         case 3:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "postButtonCell") as! PostButtonCell
+            cell.postButton.contentMode = .scaleAspectFit
+            cell.backgroundColor = UIColor.blue.dark
             
             if let profilePictureUrl = ChoozyUser.current()?.profilePictureUrl{
                 cell.postAuthorImageView.af_setImage(withURL: URL(string: profilePictureUrl)!, placeholderImage: UIImage(named: "person"), filter: AspectScaledToFillSizeCircleFilter(size: cell.postAuthorImageView.frame.size), imageTransition: .crossDissolve(0.1))
@@ -657,6 +665,8 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         default:
             
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+            cell.backgroundColor = UIColor.blue.dark
+
             return cell
         }
     }
@@ -669,14 +679,11 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         case 0:
             return self.view.bounds.size.width
         case 1:
-//            return self.view.bounds.size.width
             return 120
         case 2:
             return 120
         case 3:
-            return 120
-        case 4:
-            return 70 //90
+            return 80
         default:
             return 80
         }
@@ -686,8 +693,26 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell is selected")
+        
+        if self.player.rate == 0 {
+            self.player.play()
+
+        } else {
+            self.player.pause()
+
+        }
+        
+        if self.player.rate >= 1 {
+            self.player.seek(to: CMTimeMakeWithSeconds(0, 1))
+            self.player.play()
+        }
+    }
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
 
     
@@ -751,9 +776,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 //Find Places
                 getSuggestedPlaces()
 
-                    
-//                    postImage = thumbnailForVideoAtURL(url: selectedMovie)!
-                    
             }
 
         } else {
@@ -798,15 +820,15 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     
     //JT added for video
-    func startStopMoviePlayer(){
-        if moviePlayerController.isPreparedToPlay{
-            if moviePlayerController.playbackState == .playing{
-                moviePlayerController.pause()
-            }else{
-                moviePlayerController.play()
-            }
-        }
-    }
+//    func startStopMoviePlayer(){
+//        if moviePlayerController.isPreparedToPlay{
+//            if moviePlayerController.playbackState == .playing{
+//                moviePlayerController.pause()
+//            }else{
+//                moviePlayerController.play()
+//            }
+//        }
+//    }
     
     //MARK: - Collection View Delegate & DataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
@@ -815,19 +837,19 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         let place = suggestedPlaces[indexPath.row]
         cell.placeImageView.image = place.image
         cell.placeLabel.text = place.name
+        
+        cell.selectedBackgroundView = UIView(frame: cell.bounds)
+        cell.selectedBackgroundView!.backgroundColor = lightGreen
         return cell
     }
     
     var selectedPlace = Place()
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PlaceImageCell
+        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postMediaViewCell", for: indexPath) as! PostMediaViewCell
         
         let place = suggestedPlaces[indexPath.row]
         selectedPlace = place
-        
-        if cell == selectedPlace{
-            cell.backgroundColor = lightGreen
-        }
+
         print("did select a place")
         print(selectedPlace)
 
@@ -842,7 +864,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
 //        selectedPlace = content
 //    }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return suggestedPlaces.count
     }
@@ -853,7 +874,8 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     //Line Spacing
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        //JT changed to 5
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -962,7 +984,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         
         commentContent = content
     }
-    
+
     //MARK: - Status Bar Methods
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent

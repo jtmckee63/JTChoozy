@@ -109,8 +109,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         let newPostButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
         newPostButton.contentMode = .scaleAspectFill
-        newPostButton.setImage(UIImage(named: "cameraIcon"), for: .normal)
-        newPostButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
+        newPostButton.setImage(UIImage(named: "settingsIcon"), for: .normal)
+        newPostButton.addTarget(self, action: #selector(goToSettings), for: .touchUpInside)
         let newPostBarButtonItem = UIBarButtonItem(customView: newPostButton)
         
         //JT Added for new big button post
@@ -358,7 +358,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     func searchForPlaces(for keyword: String){
         
         removeSearchPlacesFromMapView()
-        
+        self.mapView.removeAnnotations(self.postAnnotations)
+
         //Google Places returns an error for spaces in the Request URL
         let trimmedKeyword = keyword.replacingOccurrences(of: " ", with: "")
         
@@ -646,6 +647,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             profileController.user = (sender as? ChoozyUser)!
             
         }
+        if segue.identifier == "settings" {
+            let settingsController: SettingsController = segue.destination as! SettingsController
+            settingsController.user = (sender as? ChoozyUser)!
+            
+        }
         
         let backItem = UIBarButtonItem()
         backItem.title = ""
@@ -667,6 +673,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 //            self.showProfileController(user!)
             self.performSegue(withIdentifier: "profile", sender: user)
 
+        }
+    }
+    func goToSettings(){
+        if isUserLoggedIn(){
+            let user = ChoozyUser.current()
+            self.performSegue(withIdentifier: "settings", sender: user)
         }
     }
     

@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import SwiftyDrop
 import AlamofireImage
+import AVKit
+import AVFoundation
 
 class ProfileController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
@@ -164,8 +166,21 @@ class ProfileController: UIViewController, UICollectionViewDelegate, UICollectio
             let post = posts[(indexPath as NSIndexPath).row]
             
             if let mediaUrl = post.mediaUrl, let placeName = post.placeName {
-                cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
-                cell.postDetailLabel.text = placeName
+                
+                if mediaUrl.contains(".mov") {
+                    let videoURL = Foundation.URL(string: mediaUrl)
+                    
+                    let videoImage = thumbnailForVideoAtURL(url: videoURL!)
+                    cell.postImageView.image = videoImage
+                    cell.postDetailLabel.text = placeName
+
+                    
+                } else {
+                    cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
+                    cell.postDetailLabel.text = placeName
+                }
+//                cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
+//                cell.postDetailLabel.text = placeName
             }
         }
         
@@ -181,11 +196,43 @@ class ProfileController: UIViewController, UICollectionViewDelegate, UICollectio
             if let profileImageUrl = user?.profilePictureUrl {
                 
                 headerView.profileImageView.af_setImage(withURL: URL(string: profileImageUrl)!, placeholderImage: UIImage(named: "person"), filter: AspectScaledToFillSizeCircleFilter(size: headerView.profileImageView.frame.size), imageTransition: .crossDissolve(0.1))
+                
                 headerView.viewsLabel.text = "\(views)"
                 headerView.postsLabel.text = "\(posts.count)"
                 headerView.likesLabel.text  = "\(likes)"
             }
-            
+            let postCount = self.posts.count
+            if postCount > 1 {
+                headerView.badge.image = UIImage(named: "badge1")
+                headerView.badge.layer.masksToBounds = false
+                headerView.badge.layer.borderColor = UIColor.black.cgColor
+                headerView.badge.clipsToBounds = true
+                
+            }
+            if postCount > 25 {
+                headerView.badge.image = UIImage(named: "badge2")
+                headerView.badge.layer.masksToBounds = false
+                headerView.badge.layer.borderColor = UIColor.black.cgColor
+                headerView.badge.clipsToBounds = true
+            }
+            if postCount > 50 {
+                headerView.badge.image = UIImage(named: "badge3")
+                headerView.badge.layer.masksToBounds = false
+                headerView.badge.layer.borderColor = UIColor.black.cgColor
+                headerView.badge.clipsToBounds = true
+            }
+            if postCount > 75 {
+                headerView.badge.image = UIImage(named: "badge4")
+                headerView.badge.layer.masksToBounds = false
+                headerView.badge.layer.borderColor = UIColor.black.cgColor
+                headerView.badge.clipsToBounds = true
+            }
+            if postCount > 100 {
+                headerView.badge.image = UIImage(named: "badge5")
+                headerView.badge.layer.masksToBounds = false
+                headerView.badge.layer.borderColor = UIColor.black.cgColor
+                headerView.badge.clipsToBounds = true
+            }
             return headerView
             
         }else{
@@ -236,7 +283,28 @@ class ProfileController: UIViewController, UICollectionViewDelegate, UICollectio
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    //JT added for thumbnails
+    private func thumbnailForVideoAtURL(url: URL) -> UIImage? {
+        let asset = AVAsset(url: url)
+        let duration = CMTimeGetSeconds(asset.duration)
+        let imgGen = AVAssetImageGenerator(asset:asset)
 
+        imgGen.appliesPreferredTrackTransform = true
+        let time = CMTimeMakeWithSeconds(duration/3.0, 600)
+        var img: CGImage
+        
+        do {
+            img = try imgGen.copyCGImage(at: time, actualTime: nil)
+            let frameImg: UIImage = UIImage(cgImage: img)
+            
+            return frameImg
+        } catch let error as NSError {
+            print("ERROR ON THUMBNAIL: \(error)")
+            return UIImage(named:"cameraIcon")
+        }
+
+        
+    }
 
     
     

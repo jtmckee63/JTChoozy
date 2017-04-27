@@ -11,11 +11,13 @@ import UIKit
 class PostCell: UICollectionViewCell {
     
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet var postButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         self.backgroundColor = UIColor.clear
+        
     }
 
 }

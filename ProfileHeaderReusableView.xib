@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -84,9 +84,16 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ome-ou-PWB">
+                    <rect key="frame" x="135" y="102" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="yl3-8w-5mR"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="rwn-Sl-JrX" firstAttribute="top" secondItem="qdw-bX-egF" secondAttribute="bottom" constant="10" id="0aF-fg-9Hc"/>
+                <constraint firstItem="ome-ou-PWB" firstAttribute="leading" secondItem="qdw-bX-egF" secondAttribute="leading" id="0zH-nk-FaT"/>
                 <constraint firstItem="qdw-bX-egF" firstAttribute="leading" secondItem="j1t-l1-IGC" secondAttribute="trailing" constant="35" id="1Wu-v9-aW0"/>
                 <constraint firstItem="qdw-bX-egF" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="7EI-Gc-1Mn"/>
                 <constraint firstItem="Nfz-Yg-D5P" firstAttribute="top" secondItem="j1t-l1-IGC" secondAttribute="bottom" constant="10" id="9TT-nu-QGH"/>
@@ -100,10 +107,13 @@
                 <constraint firstItem="bjF-Yd-MML" firstAttribute="leading" secondItem="qdw-bX-egF" secondAttribute="trailing" constant="35" id="g7N-vY-6k9"/>
                 <constraint firstAttribute="bottom" secondItem="rwn-Sl-JrX" secondAttribute="bottom" constant="20" id="grm-D5-vYj"/>
                 <constraint firstItem="rwn-Sl-JrX" firstAttribute="leading" secondItem="Nfz-Yg-D5P" secondAttribute="trailing" constant="35" id="lhN-xT-YLT"/>
+                <constraint firstItem="qdw-bX-egF" firstAttribute="top" secondItem="ome-ou-PWB" secondAttribute="bottom" constant="8" symbolic="YES" id="suV-6A-GGK"/>
+                <constraint firstItem="ome-ou-PWB" firstAttribute="trailing" secondItem="qdw-bX-egF" secondAttribute="trailing" id="udu-Yg-7aG"/>
                 <constraint firstAttribute="bottom" secondItem="GnP-Pq-MLr" secondAttribute="bottom" constant="20" id="ufS-hq-Hyb"/>
                 <constraint firstItem="GnP-Pq-MLr" firstAttribute="leading" secondItem="rwn-Sl-JrX" secondAttribute="trailing" constant="35" id="vr5-wY-WIc"/>
             </constraints>
             <connections>
+                <outlet property="badge" destination="ome-ou-PWB" id="xGc-2J-l0W"/>
                 <outlet property="likesLabel" destination="GnP-Pq-MLr" id="aZY-x8-gRd"/>
                 <outlet property="likesTitleLabel" destination="bjF-Yd-MML" id="tAu-UN-Gkf"/>
                 <outlet property="postsLabel" destination="rwn-Sl-JrX" id="iLt-O0-TjM"/>

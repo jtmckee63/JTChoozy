@@ -13,10 +13,23 @@ import Alamofire
 import AlamofireImage
 import SwiftyDrop
 import SCLAlertView
+import MediaPlayer
+
 
 class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var detailTableView: UITableView!
+    
+    //JT added for video
+    @IBOutlet var mediaView: UIView!
+    var moviePlayerController = MPMoviePlayerController()
+    var defaultCameraImage = UIImage(named: "cameraImage")
+    var selectedMovieURL: URL?
+    var selectedImageFromPicker: UIImage?
+//    var player:AVPlayer?
+    var player = AVPlayer()
+    var playerLayer = AVPlayerLayer()
+    var playerItem:AVPlayerItem?
     
     let refreshControl = UIRefreshControl()
     
@@ -137,6 +150,7 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         title = getDateStringFromDate(date)
     }
     
+    var avPlayerAdded = false
     //MARK: - UITableView Delegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -150,12 +164,44 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
             if !self.refreshControl.isRefreshing{
                 
                 if let mediaUrl = post.mediaUrl{
-                    cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
                     
-                    let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(showDetailImage))
-                    doubleTapGesture.numberOfTapsRequired = 2
-                    cell.postImageView.isUserInteractionEnabled = true
-                    cell.postImageView.addGestureRecognizer(doubleTapGesture)
+                    //JT added
+                    if mediaUrl.contains(".mov")
+                    {
+                        if !avPlayerAdded{
+                            
+                            cell.mediaView.contentMode = .scaleAspectFit
+                            
+                            let videoURL = Foundation.URL(string: mediaUrl)
+                            self.player = AVPlayer(url: videoURL!)
+                            self.playerLayer = AVPlayerLayer(player: player)
+                            
+                            playerLayer.masksToBounds = true
+                            player.allowsExternalPlayback = true
+                            playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+                            
+                            cell.mediaView.layer.addSublayer(playerLayer)
+                            playerLayer.frame = cell.mediaView.bounds
+
+                            player.play()
+                            avPlayerAdded = true
+                        }
+                        
+                    } else {
+                        
+                        let imageView = UIImageView(frame: cell.mediaView.bounds)
+                       
+                        imageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: imageView.frame.size), imageTransition: .crossDissolve(0.1))
+                        
+                        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(showDetailImage))
+                        doubleTapGesture.numberOfTapsRequired = 2
+                        imageView.isUserInteractionEnabled = true
+                        imageView.addGestureRecognizer(doubleTapGesture)
+                        
+                        cell.mediaView.addSubview(imageView)
+                        
+                    }
+
                 }
                 
                 if let postAuthor = post.author, let placeName = post.placeName, let placeId = post.placeId{
@@ -187,8 +233,11 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         cell.headerAuthorLabel.attributedText = headerNameString
                         
                         cell.headerPlaceLabel.placeId = placeId
+                        print(placeId)
                         cell.headerPlaceLabel.placeName = placeName
+                        print(placeName)
                         cell.headerPlaceLabel.attributedText = headerPlaceString
+                        print(headerPlaceString)
                         cell.headerPlaceLabel.isUserInteractionEnabled = true
                         cell.headerPlaceLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToPlaceController(_ :))))
                     }
@@ -288,6 +337,21 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
             return UITableViewAutomaticDimension
         default:
             return UITableViewAutomaticDimension
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell is selected")
+        
+        if self.player.rate == 0 {
+            self.player.play()
+        } else {
+            self.player.pause()
+        }
+        
+        if self.player.rate >= 1 {
+            self.player.seek(to: CMTimeMakeWithSeconds(0, 1))
+            self.player.play()
         }
     }
     

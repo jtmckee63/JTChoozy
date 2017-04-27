@@ -11,6 +11,8 @@ import Parse
 import SwiftyDrop
 import AlamofireImage
 import GooglePlaces
+import AVKit
+import AVFoundation
 
 class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
@@ -19,6 +21,7 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     var posts = [Post]()
     
     let refreshControl = UIRefreshControl()
+    let headerView = PostHeaderReusableView()
     
     @IBOutlet weak var postsCollectionView: UICollectionView!
 
@@ -44,6 +47,10 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
         refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
         postsCollectionView.addSubview(refreshControl)
         
+        //JT added for post button on place screen
+        
+//        headerView.postButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
+       
         //Initial Call to load our data.
         refreshAllData()
     }
@@ -57,7 +64,11 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
         posts.removeAll()
         loadPosts()
     }
-    
+    func goToPostController(){
+        if isUserLoggedIn(){
+            self.showPostController()
+        }
+    }
     func loadPosts(){
         if let placeId = place?.0 {
             
@@ -165,7 +176,8 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
             }
         }
     }
-
+    //JT added for new post button
+    
     //MARK: - Collection View Delegate & DataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
@@ -176,8 +188,18 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
             let post = posts[(indexPath as NSIndexPath).row]
             
             if let mediaUrl = post.mediaUrl {
-                cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
+                if mediaUrl.contains(".mov") {
+                    let videoURL = Foundation.URL(string: mediaUrl)
+                    
+                    let videoImage = thumbnailForVideoAtURL(url: videoURL!)
+                    cell.postImageView.image = videoImage
+                    
+                } else {
+                    
+                    cell.postImageView.af_setImage(withURL: URL(string: mediaUrl)!, filter: AspectScaledToFillSizeFilter(size: cell.postImageView.frame.size), imageTransition: .crossDissolve(0.1))
+                }
             }
+            
         }
         
         return cell
@@ -190,7 +212,10 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! PostHeaderReusableView
            
             headerView.headerImageView.image = placeImage
-            
+            headerView.postButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
+            let postB = headerView.postButton
+            postB?.layer.cornerRadius = 0.5 * (postB?.bounds.size.width)!
+            postB?.clipsToBounds = true
             return headerView
             
         }else{
@@ -205,6 +230,9 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let post = posts[(indexPath as NSIndexPath).row]
         self.showDetailController(post)
+        
+        print("inside collectionView did select")
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -241,5 +269,46 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    //JT added for thumbnails
+    private func thumbnailForVideoAtURL(url: URL) -> UIImage? {
+//        let asset = AVAsset(url: url)
+//        let imgGen = AVAssetImageGenerator(asset:asset)
+//        imgGen.appliesPreferredTrackTransform = true
+//        var time = asset.duration
+//        time.value = min(time.value, 1)
+//        print(time)
+//    
+//        do {
+//            print(time)
+//            let imageRef = try imgGen.copyCGImage(at: time, actualTime: nil)
+//            
+//            return UIImage(cgImage: imageRef)
+//            
+//        } catch {
+//            print("Error with thumbnails")
+//            return nil
+//        }
+        let asset = AVAsset(url: url)
+        let duration = CMTimeGetSeconds(asset.duration)
+        let imgGen = AVAssetImageGenerator(asset:asset)
+        
+        imgGen.appliesPreferredTrackTransform = true
+        //        var time = asset.duration
+        //        time.value = min(time.value, 2)
+        let time = CMTimeMakeWithSeconds(duration/3.0, 600)
+        var img: CGImage
+        
+        do {
+            img = try imgGen.copyCGImage(at: time, actualTime: nil)
+            let frameImg: UIImage = UIImage(cgImage: img)
+            
+            return frameImg
+        } catch let error as NSError {
+            print("ERROR ON THUMBNAIL: \(error)")
+            return UIImage(named:"cameraIcon")
+        }
+        
+    }
+
     
 }

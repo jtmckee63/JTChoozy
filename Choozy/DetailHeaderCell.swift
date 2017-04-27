@@ -14,7 +14,7 @@ class DetailHeaderCell: UITableViewCell {
     @IBOutlet var headerImageView: ChoozyUserImageView!
     @IBOutlet var headerAuthorLabel: ChoozyUserLabel!
     @IBOutlet var headerPlaceLabel: ChoozyPlaceLabel!
-    @IBOutlet var postImageView: UIImageView!
+    @IBOutlet var mediaView: UIView!
     @IBOutlet var actionView: UIView!
     @IBOutlet var likePostButton: UIButton!
     @IBOutlet var likesLabel: UILabel!
@@ -26,6 +26,7 @@ class DetailHeaderCell: UITableViewCell {
         super.awakeFromNib()
         
         self.backgroundColor = UIColor.blue.extraDark
+        mediaView.backgroundColor = UIColor.clear
         self.selectionStyle = .none
         
         headerView.backgroundColor = UIColor.black.flat.withAlphaComponent(0.85)

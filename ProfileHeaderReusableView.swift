@@ -20,6 +20,8 @@ class ProfileHeaderReusableView: UICollectionReusableView {
     @IBOutlet var postsLabel: UILabel!
     @IBOutlet var likesLabel: UILabel!
     
+    @IBOutlet var badge: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
