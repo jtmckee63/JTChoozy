@@ -20,14 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let locationManager = CLLocationManager()
-
+    //colors JT
+    var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
+    var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+    var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+    var black: UIColor = UIColor.black
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         //Navigation Controller
         let navigationItem = UINavigationItem()
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.barTintColor = UIColor.blue.flat
+//        navigationBarAppearance.barTintColor = UIColor.blue.flat
+        navigationBarAppearance.barTintColor = blurple
+
         navigationBarAppearance.barStyle = UIBarStyle.black
         navigationBarAppearance.tintColor = UIColor.white.pure
         navigationBarAppearance.isTranslucent = false

@@ -19,6 +19,13 @@ import MediaPlayer
 class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var detailTableView: UITableView!
+    //colors JT
+    var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
+    var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+    var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+    var black: UIColor = UIColor.black
+    let darkGray = UIColor(red:0.25, green:0.25, blue:0.25, alpha:1.0)
+
     
     //JT added for video
     @IBOutlet var mediaView: UIView!
@@ -54,14 +61,16 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let shareBarButtonItem = UIBarButtonItem(customView: shareButton)
         
         self.navigationItem.setRightBarButtonItems([moreBarButtonItem, shareBarButtonItem], animated: false)
-        self.view.backgroundColor = UIColor.blue.light
+//        self.view.backgroundColor = UIColor.blue.light
+        self.view.backgroundColor = darkGray
         
         //Detail Table View
         detailTableView.delegate = self
         detailTableView.dataSource = self
         detailTableView.register(UINib(nibName: "DetailHeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         detailTableView.register(UINib(nibName: "CommentCell", bundle: nil), forCellReuseIdentifier: "commentCell")
-        detailTableView.backgroundColor = UIColor.blue.light
+//        detailTableView.backgroundColor = UIColor.blue.light
+        detailTableView.backgroundColor = black
         detailTableView.separatorStyle = .none
         detailTableView.indicatorStyle = .white
         detailTableView.estimatedRowHeight = 70

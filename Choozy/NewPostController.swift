@@ -48,15 +48,18 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
     var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
     var black: UIColor = UIColor.black
+    let darkGray = UIColor(red:0.25, green:0.25, blue:0.25, alpha:1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Background Color
-        self.view.backgroundColor = UIColor.blue.light
-        
+//        self.view.backgroundColor = UIColor.blue.light
+        self.view.backgroundColor = black
         //Post Table View
-        postTableView.backgroundColor = UIColor.blue.light
+//        postTableView.backgroundColor = UIColor.blue.light
+        postTableView.backgroundColor = darkGray
+
         postTableView.delegate = self
         postTableView.dataSource = self
         postTableView.separatorStyle = .none
@@ -566,6 +569,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             alertView.showTitle("Uh oh!", subTitle: "\n You can't post with an empty comment! \n", style: .info, closeButtonTitle: "Okay", duration: 0.0, colorStyle: UIColor.purple.hex.flat, colorTextButton: 0xECF0F1, circleIconImage: UIImage(named: "alertPinIcon"), animationStyle: .leftToRight)
         }
+        //
     }
     
     func deletePost(post: Post){
@@ -631,9 +635,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             cell.placesCollectionView.collectionViewLayout = collectionViewLayout
             cell.placesCollectionView.reloadData()
             
-//            //jt
-//            self.view.translatesAutoresizingMaskIntoConstraints = false
-            
             return cell
             
         case 2:
@@ -649,7 +650,9 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "postButtonCell") as! PostButtonCell
             cell.postButton.contentMode = .scaleAspectFit
-            cell.backgroundColor = UIColor.blue.dark
+//            cell.backgroundColor = UIColor.blue.dark
+            cell.backgroundColor = lightGreen
+
             
             if let profilePictureUrl = ChoozyUser.current()?.profilePictureUrl{
                 cell.postAuthorImageView.af_setImage(withURL: URL(string: profilePictureUrl)!, placeholderImage: UIImage(named: "person"), filter: AspectScaledToFillSizeCircleFilter(size: cell.postAuthorImageView.frame.size), imageTransition: .crossDissolve(0.1))
@@ -665,7 +668,9 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         default:
             
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-            cell.backgroundColor = UIColor.blue.dark
+//            cell.backgroundColor = UIColor.blue.dark
+            cell.backgroundColor = black
+
 
             return cell
         }
@@ -837,6 +842,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         let place = suggestedPlaces[indexPath.row]
         cell.placeImageView.image = place.image
         cell.placeLabel.text = place.name
+        print(place.name)
         
         cell.selectedBackgroundView = UIView(frame: cell.bounds)
         cell.selectedBackgroundView!.backgroundColor = lightGreen
@@ -845,8 +851,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     var selectedPlace = Place()
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var cell = collectionView.dequeueReusableCell(withReuseIdentifier: "postMediaViewCell", for: indexPath) as! PostMediaViewCell
-        
         let place = suggestedPlaces[indexPath.row]
         selectedPlace = place
 

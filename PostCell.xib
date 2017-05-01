@@ -21,6 +21,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eth-ci-Vnv">
                         <rect key="frame" x="0.0" y="0.0" width="205" height="205"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="eth-ci-Vnv" secondAttribute="height" multiplier="1:1" id="a1t-TQ-q18"/>
                         </constraints>

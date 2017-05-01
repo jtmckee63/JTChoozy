@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choozy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ec-k2-dTr">
-                                <rect key="frame" x="97" y="288" width="180" height="90"/>
+                                <rect key="frame" x="97" y="157" width="180" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="MmQ-UR-sXI"/>
                                 </constraints>
@@ -42,19 +42,29 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChoozyLogoOutline" translatesAutoresizingMaskIntoConstraints="NO" id="Z9R-jm-vRs">
+                                <rect key="frame" x="112" y="255" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="0IS-xF-bKo"/>
+                                    <constraint firstAttribute="height" constant="150" id="ama-ri-bq3"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Z9R-jm-vRs" firstAttribute="centerX" secondItem="6Ec-k2-dTr" secondAttribute="centerX" id="7ih-mT-3jK"/>
                             <constraint firstAttribute="trailing" secondItem="pGc-A6-MOf" secondAttribute="trailing" id="Ekh-yz-HhO"/>
                             <constraint firstItem="6Ec-k2-dTr" firstAttribute="centerX" secondItem="m8h-sg-PPX" secondAttribute="centerX" id="IIP-Rs-XRY"/>
+                            <constraint firstItem="Z9R-jm-vRs" firstAttribute="top" secondItem="6Ec-k2-dTr" secondAttribute="bottom" constant="8" symbolic="YES" id="ItJ-WW-8wZ"/>
                             <constraint firstItem="lkd-Dh-gzv" firstAttribute="top" secondItem="pGc-A6-MOf" secondAttribute="bottom" id="LHe-36-SFy"/>
                             <constraint firstItem="6Ec-k2-dTr" firstAttribute="leading" secondItem="m8h-sg-PPX" secondAttribute="leadingMargin" constant="81" id="O4E-xI-vA9"/>
-                            <constraint firstItem="6Ec-k2-dTr" firstAttribute="centerY" secondItem="m8h-sg-PPX" secondAttribute="centerY" id="Rsp-js-51G"/>
+                            <constraint firstItem="6Ec-k2-dTr" firstAttribute="centerY" secondItem="m8h-sg-PPX" secondAttribute="centerY" constant="-131.5" id="Rsp-js-51G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Ec-k2-dTr" secondAttribute="trailing" constant="82" id="YUI-EX-tUu"/>
                             <constraint firstItem="pGc-A6-MOf" firstAttribute="leading" secondItem="m8h-sg-PPX" secondAttribute="leading" id="e52-CJ-fGp"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="choozyLogo" destination="Z9R-jm-vRs" id="Mfg-Ue-JsD"/>
                         <outlet property="logginButton" destination="pGc-A6-MOf" id="vL8-ON-qaY"/>
                         <outlet property="titleLabel" destination="6Ec-k2-dTr" id="jLw-41-2im"/>
                     </connections>
@@ -91,7 +101,7 @@
                                     <constraint firstAttribute="width" constant="60" id="KJb-9I-fby"/>
                                     <constraint firstAttribute="height" constant="60" id="fQj-Ij-IV9"/>
                                 </constraints>
-                                <state key="normal" image="cameraButtonV2"/>
+                                <state key="normal" image="cameraButtonV4"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,42 +145,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvV-Ws-kJU">
-                                <rect key="frame" x="62" y="267" width="250" height="50"/>
-                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="zfG-4s-Piv"/>
-                                </constraints>
-                                <state key="normal" title="Logout">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-Wb-VQ0">
-                                <rect key="frame" x="62" y="469" width="250" height="50"/>
-                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="USj-BN-q9X"/>
-                                </constraints>
-                                <state key="normal" title="About Choozy">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0F-kp-gLN">
-                                <rect key="frame" x="62" y="370" width="250" height="50"/>
-                                <color key="backgroundColor" red="0.093944792469999996" green="0.1036404809" blue="1" alpha="0.57999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="sgR-pl-jFR"/>
-                                </constraints>
-                                <state key="normal" title="Tutorial">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KyM-Yu-6Qd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KyM-Yu-6Qd">
                                 <rect key="frame" x="127" y="91" width="120" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="j41-Hk-sv5"/>
-                                    <constraint firstAttribute="width" constant="120" id="nKP-Ff-D1Q"/>
-                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choozy Version 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0d-Zj-GPA">
                                 <rect key="frame" x="114" y="588" width="146" height="20"/>
@@ -178,22 +154,52 @@
                                 <color key="textColor" red="0.048407458440000002" green="1" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvV-Ws-kJU">
+                                <rect key="frame" x="37" y="267" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.108423402244077" green="0.72910057106598991" blue="0.0" alpha="0.92000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HOp-nW-Ma1"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-Wb-VQ0">
+                                <rect key="frame" x="37" y="468" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.108423402244077" green="0.72910057106598991" blue="0.0" alpha="0.92000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="OoY-TI-JCU"/>
+                                </constraints>
+                                <state key="normal" title="About Choozy">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0F-kp-gLN">
+                                <rect key="frame" x="37" y="369" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.108423402244077" green="0.72910057106598991" blue="0.0" alpha="0.92000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0se-p9-ZXF"/>
+                                </constraints>
+                                <state key="normal" title="Tutorial">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="p0F-kp-gLN" firstAttribute="top" secondItem="mvV-Ws-kJU" secondAttribute="bottom" constant="53" id="0ar-iF-5Ad"/>
-                            <constraint firstItem="KyM-Yu-6Qd" firstAttribute="centerX" secondItem="XQf-Rc-Uvm" secondAttribute="centerX" id="D7b-kE-gE0"/>
-                            <constraint firstItem="i0d-Zj-GPA" firstAttribute="centerX" secondItem="6Hk-Wb-VQ0" secondAttribute="centerX" id="Gkw-Ro-3Nb"/>
-                            <constraint firstItem="KyM-Yu-6Qd" firstAttribute="top" secondItem="FwY-ot-Eao" secondAttribute="bottom" constant="27" id="KtF-RK-J6s"/>
-                            <constraint firstItem="AfE-Kn-YUI" firstAttribute="top" secondItem="i0d-Zj-GPA" secondAttribute="bottom" constant="59" id="M90-7s-uZU"/>
-                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="XQf-Rc-Uvm" secondAttribute="leadingMargin" constant="46" id="RZO-UT-eIU"/>
-                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="top" secondItem="KyM-Yu-6Qd" secondAttribute="bottom" constant="56" id="ULJ-uT-Uje"/>
-                            <constraint firstItem="p0F-kp-gLN" firstAttribute="trailing" secondItem="6Hk-Wb-VQ0" secondAttribute="trailing" id="Ue0-KJ-u1M"/>
-                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="p0F-kp-gLN" secondAttribute="leading" id="V8k-Th-Q99"/>
-                            <constraint firstItem="p0F-kp-gLN" firstAttribute="leading" secondItem="6Hk-Wb-VQ0" secondAttribute="leading" id="adY-ph-LaH"/>
-                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="trailing" secondItem="p0F-kp-gLN" secondAttribute="trailing" id="iJm-RF-FOa"/>
-                            <constraint firstItem="6Hk-Wb-VQ0" firstAttribute="top" secondItem="p0F-kp-gLN" secondAttribute="bottom" constant="49" id="rSX-Iq-NmQ"/>
-                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="vbr-9v-ckt"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="p0F-kp-gLN" secondAttribute="leading" id="0Kw-ok-LuX"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="FF5-L8-Jtm"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="top" secondItem="KyM-Yu-6Qd" secondAttribute="bottom" constant="56" id="HKK-xk-2sf"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="leading" secondItem="XQf-Rc-Uvm" secondAttribute="leadingMargin" constant="21" id="LRg-2H-Bhc"/>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="NWi-1A-cdz"/>
+                            <constraint firstItem="AfE-Kn-YUI" firstAttribute="top" secondItem="i0d-Zj-GPA" secondAttribute="bottom" constant="59" id="PbM-NI-9Rf"/>
+                            <constraint firstItem="6Hk-Wb-VQ0" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="ZiG-WP-1oV"/>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="top" secondItem="mvV-Ws-kJU" secondAttribute="bottom" constant="52" id="azQ-h6-9jo"/>
+                            <constraint firstItem="p0F-kp-gLN" firstAttribute="leading" secondItem="6Hk-Wb-VQ0" secondAttribute="leading" id="dXO-Kh-ZGj"/>
+                            <constraint firstItem="mvV-Ws-kJU" firstAttribute="centerX" secondItem="XQf-Rc-Uvm" secondAttribute="centerX" id="kQY-ss-sXj"/>
+                            <constraint firstItem="6Hk-Wb-VQ0" firstAttribute="top" secondItem="p0F-kp-gLN" secondAttribute="bottom" constant="49" id="spI-qc-Ocb"/>
+                            <constraint firstItem="i0d-Zj-GPA" firstAttribute="centerX" secondItem="KyM-Yu-6Qd" secondAttribute="centerX" id="udD-wQ-8yA"/>
+                            <constraint firstItem="i0d-Zj-GPA" firstAttribute="top" secondItem="6Hk-Wb-VQ0" secondAttribute="bottom" constant="70" id="zfQ-oN-UWf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -364,7 +370,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cameraButtonV2" width="122" height="122"/>
+        <image name="ChoozyLogoOutline" width="296" height="296"/>
+        <image name="cameraButtonV4" width="122" height="122"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aXP-5x-xUv"/>

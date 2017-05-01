@@ -19,6 +19,7 @@ class LoginController: UIViewController {
     @IBOutlet var logginButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet var choozyLogo: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +42,10 @@ class LoginController: UIViewController {
         logginButton.alpha = 1
         logginButton.addTarget(self, action: #selector(self.facebookLoginOrRegister), for: .touchUpInside)
         logginButton.setTitle("Login with Facebook", for: .normal)
+        
+        choozyLogo.layer.cornerRadius = 0.5 * choozyLogo.bounds.size.width
+        choozyLogo.clipsToBounds = true
+        
     }
     
     func facebookLoginOrRegister(){

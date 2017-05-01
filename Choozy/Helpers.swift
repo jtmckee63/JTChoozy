@@ -203,11 +203,26 @@ enum Custom: DropStatable {
     case error
     
     var backgroundColor: UIColor? {
+        //colors JT
+//        let lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
+        let blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+        let lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+        let black: UIColor = UIColor.black
+        
         switch self {
-        case .fetching: return UIColor.blue.dark
-        case .complete: return UIColor.blue.light
-        case .empty: return UIColor.watermelon.dark
-        case .error: return UIColor.watermelon.dark
+//        case .fetching: return UIColor.blue.dark
+        case .fetching: return blurple
+
+//        case .complete: return UIColor.blue.light
+        case .complete: return blurple
+
+//        case .empty: return UIColor.watermelon.dark
+        case .empty: return lightGreen
+
+//        case .error: return UIColor.watermelon.dark
+        case .error: return lightGreen
+
+            
         }
     }
     var font: UIFont? {

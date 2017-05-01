@@ -408,6 +408,19 @@ extension UIViewController{
         let postController = NewPostController()
         self.present(postController, animated: true, completion: nil)
     }
+    func exPlacePoster(_ placeId: String, placeName: String) {
+        let thePlace = Place()
+        let postController = NewPostController()
+        thePlace.id = placeId
+        thePlace.name = placeName
+        
+        self.present(postController, animated: true, completion: nil)
+
+    }
+//    func getPlaceForPost() -> (placeId: String, placeName: String){
+//        let place = (placeId, placeName)
+//        return place
+//    }
     
     //MARK: - Segue Navigations
     func showLoginController(){

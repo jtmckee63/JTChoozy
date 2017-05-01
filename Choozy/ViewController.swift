@@ -316,6 +316,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         annotation.title = annotation.post.placeName
         annotation.subtitle = getDateStringFromDate(post.timeStamp!)
         
+        annotation.blurplePinColor()
+        
         postAnnotations.append(annotation)
         
         self.mapView.showAnnotations(self.postAnnotations, animated: true)
@@ -436,6 +438,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 let post = postAnnotation.post
                 self.showDetailController(post)
             }
+            
             //JT end
             //JT comment out cam code
 //            self.showDetailController(post)

@@ -24,11 +24,17 @@ class ProfileController: UIViewController, UICollectionViewDelegate, UICollectio
     
     var likes = Int()
     var views = Int()
+    
+    let blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+    let lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+    let black: UIColor = UIColor.black
+    let darkGray = UIColor(red:0.25, green:0.25, blue:0.25, alpha:1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.blue.light
+//        self.view.backgroundColor = UIColor.blue.light
+        self.view.backgroundColor = darkGray
 
         //Title
         setTitle()

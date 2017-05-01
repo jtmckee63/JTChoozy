@@ -21,11 +21,15 @@ class DetailHeaderCell: UITableViewCell {
     @IBOutlet var viewsImageView: UIImageView!
     @IBOutlet var viewsLabel: UILabel!
     @IBOutlet var commentButton: UIButton!
-
+    let blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
+    let lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
+    let black: UIColor = UIColor.black
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = UIColor.blue.extraDark
+//        self.backgroundColor = UIColor.blue.extraDark
+        self.backgroundColor = black
         mediaView.backgroundColor = UIColor.clear
         self.selectionStyle = .none
         
