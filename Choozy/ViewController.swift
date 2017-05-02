@@ -664,6 +664,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func goToPostController(){
         if isUserLoggedIn(){
+            placePost = false
             self.showPostController()
         }
     }

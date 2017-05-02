@@ -71,6 +71,7 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     }
     func goToPostController(){
         if isUserLoggedIn(){
+            placePost = false
             self.showPostController()
         }
     }
