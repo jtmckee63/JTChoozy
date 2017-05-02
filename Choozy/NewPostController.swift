@@ -40,6 +40,11 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     var player = AVPlayer()
     var playerLayer = AVPlayerLayer()
+    //JT added for place new post
+    var thePlace = Place()
+    var placeLat = Double()
+    var placeLog = Double()
+    
     
     
 
@@ -110,7 +115,15 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 postButton.isEnabled = false
                 
                 let takenLocation = locationManager.getCurrentLocationCoordinates()
-
+                
+                print(self.placeLat)
+                print(self.placeLog)
+                
+                let takenLoc = PFGeoPoint(latitude: takenLocation.latitude, longitude: takenLocation.longitude)
+                let placeLocation = PFGeoPoint(latitude: self.placeLat, longitude: self.placeLog)
+                let distance = takenLoc.distanceInMiles(to: placeLocation)
+                print(distance)
+                
                 
                 getLocationDictionary(location: CLLocation(latitude: takenLocation.latitude, longitude: takenLocation.longitude),
                                       completion:({(location) in
@@ -141,24 +154,20 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                                                         
                                                     }else{
                                                         
+                                                        
                                                         if success{
                                                             
                                                             /**
                                                              * At this point we have successfully created and saved a PFFile.
                                                              * We now need to save a Post and a Comment.
                                                              */
-                                                            
-//                                                            guard
-//                                                                let mediaUrl = postMedia?.url,
-//                                                                let placeId = self.selectedPlace.id,
-//                                                                let placeName = self.selectedPlace.name
-//                                                                else {
-//                                                                    return
-//                                                            }
+
                                                             
                                                             let mediaUrl = postMedia?.url
-                                                            let placeId = self.selectedPlace.id
-                                                            let placeName = self.selectedPlace.name
+                                                            let placeId = self.selectedPlace.id!
+                                                            let placeName = self.selectedPlace.name!
+
+                                                            
                                                             
                                                             let post = Post()
                                                             post["likes"] = 0
@@ -175,6 +184,161 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                                                             post["placeId"] = placeId
                                                             post["placeName"] = placeName
                                                             
+                                                            if (distance > 1) {
+                                                                Drop.down(" You are not near this place :( ", state: Custom.error)
+                                                                self.deletePost(post: post)
+                                                                postButton.isEnabled = true
+                                                            } else {
+                                                                post.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
+                                                                    
+                                                                    if success{
+                                                                        
+                                                                        /**
+                                                                         * At this point we have successfully created and saved a Post.
+                                                                         * We now need to save a Comment.
+                                                                         */
+                                                                        
+                                                                        let comment = Comment()
+                                                                        comment["author"] = ChoozyUser.current()
+                                                                        comment["postId"] = post.objectId
+                                                                        comment["comment"] = self.commentContent
+                                                                        comment.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
+                                                                            
+                                                                            if success{
+                                                                                
+                                                                                /**
+                                                                                 * At this point we have successfully created and saved a Post, and Comment.
+                                                                                 * This is our end goal. ⭐️⭐️⭐️⭐️⭐️
+                                                                                 * We now need to dismiss the NewPostController
+                                                                                 * and show the new Post on the mapView.
+                                                                                 */
+                                                                                
+                                                                                Drop.down(" Thanks for posting! ", state: Custom.complete)
+                                                                                postButton.isEnabled = true
+                                                                                
+                                                                                //Refresh our Data after we add a new post.
+                                                                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addPostAfterPosting"), object: nil, userInfo: ["postId": post.objectId! as String])
+                                                                                
+                                                                                self.dismissViewController()
+                                                                            }
+                                                                                
+                                                                            else if let error = error{
+                                                                                
+                                                                                /**
+                                                                                 * There was an error while saving the comment.
+                                                                                 * We now need to alert the user, delete the post we just created (in the background),
+                                                                                 * and allow the user to post again.
+                                                                                 */
+                                                                                print(error)
+                                                                                
+                                                                                Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
+                                                                                self.deletePost(post: post)
+                                                                                postButton.isEnabled = true
+                                                                                
+                                                                                
+                                                                            }else{
+                                                                                
+                                                                                /**
+                                                                                 * There was an error while saving the comment.
+                                                                                 * We now need to alert the user, delete the post we just created (in the background),
+                                                                                 * and allow the user to post again.
+                                                                                 */
+                                                                                
+                                                                                Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
+                                                                                self.deletePost(post: post)
+                                                                                postButton.isEnabled = true
+                                                                                
+                                                                            }
+                                                                        })
+                                                                        
+                                                                    }else if let error = error {
+                                                                        
+                                                                        /**
+                                                                         * There was an error while saving the post.
+                                                                         * We now need to alert the user
+                                                                         * and allow the user to post again.
+                                                                         */
+                                                                        print(error)
+                                                                        
+                                                                        Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
+                                                                        postButton.isEnabled = true
+                                                                        
+                                                                    }else{
+                                                                        
+                                                                        /**
+                                                                         * There was an error while saving the post.
+                                                                         * We now need to alert the user
+                                                                         * and allow the user to post again.
+                                                                         */
+                                                                        
+                                                                        Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
+                                                                        postButton.isEnabled = true
+                                                                        
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                    }
+                                                })
+                                            }
+                                            
+                                        }else{
+                                            let mediaData = UIImageJPEGRepresentation(self.postImage, 0.8)!
+                                            
+                                            let postMedia = PFFile(name: "post_" + randomPostId + ".jpeg", data: mediaData)
+                                            print("inside image post method")
+                                            
+                                            postMedia?.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
+                                                
+                                                if let error = error{
+                                                    
+                                                    /**
+                                                     * There was an error while saving the PFFile.
+                                                     * We now need to alert the user
+                                                     * and allow the user to post again.
+                                                     */
+                                                    print(error)
+                                                    
+                                                    Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
+                                                    postButton.isEnabled = true
+                                                    
+                                                }else{
+                                                    
+                                                    if success{
+                                                        
+                                                        /**
+                                                         * At this point we have successfully created and saved a PFFile.
+                                                         * We now need to save a Post and a Comment.
+                                                         */
+                                                        
+                                                        guard
+                                                            let mediaUrl = postMedia?.url,
+                                                            let placeId = self.selectedPlace.id,
+                                                            let placeName = self.selectedPlace.name
+                                                            else {
+                                                                return
+                                                        }
+
+                                                        let post = Post()
+                                                        post["likes"] = 0
+                                                        post["views"] = 0
+                                                        post["subAddress"] = location["subAddress"]
+                                                        post["address"] = location["address"]
+                                                        post["city"] = location["city"]
+                                                        post["state"] = location["state"]
+                                                        post["country"] = location["country"]
+                                                        post["location"] = PFGeoPoint(latitude: takenLocation.latitude, longitude: takenLocation.longitude)
+                                                        post["author"] = ChoozyUser.current()
+                                                        post["authorId"] = ChoozyUser.current()?.objectId
+                                                        post["mediaUrl"] = mediaUrl
+                                                        post["placeId"] = placeId
+                                                        post["placeName"] = placeName
+                                                        
+                                                        if (distance > 1) {
+                                                            Drop.down(" You are not near this place :( ", state: Custom.error)
+                                                            self.deletePost(post: post)
+                                                            postButton.isEnabled = true
+                                                        } else {
                                                             post.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
                                                                 
                                                                 if success{
@@ -262,297 +426,12 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                                                                     
                                                                 }
                                                             })
-                                                            
                                                         }
-                                                    }
-                                                })
-                                            }
-                                            
-                                        }else{
-                                            let mediaData = UIImageJPEGRepresentation(self.postImage, 0.8)!
-                                            
-                                            let postMedia = PFFile(name: "post_" + randomPostId + ".jpeg", data: mediaData)
-                                            print("inside image post method")
-                                            
-                                            postMedia?.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-                                                
-                                                if let error = error{
-                                                    
-                                                    /**
-                                                     * There was an error while saving the PFFile.
-                                                     * We now need to alert the user
-                                                     * and allow the user to post again.
-                                                     */
-                                                    print(error)
-                                                    
-                                                    Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-                                                    postButton.isEnabled = true
-                                                    
-                                                }else{
-                                                    
-                                                    if success{
-                                                        
-                                                        /**
-                                                         * At this point we have successfully created and saved a PFFile.
-                                                         * We now need to save a Post and a Comment.
-                                                         */
-                                                        
-                                                        guard
-                                                            let mediaUrl = postMedia?.url,
-                                                            let placeId = self.selectedPlace.id,
-                                                            let placeName = self.selectedPlace.name
-                                                            else {
-                                                                return
-                                                        }
-                                                        
-                                                        let post = Post()
-                                                        post["likes"] = 0
-                                                        post["views"] = 0
-                                                        post["subAddress"] = location["subAddress"]
-                                                        post["address"] = location["address"]
-                                                        post["city"] = location["city"]
-                                                        post["state"] = location["state"]
-                                                        post["country"] = location["country"]
-                                                        post["location"] = PFGeoPoint(latitude: takenLocation.latitude, longitude: takenLocation.longitude)
-                                                        post["author"] = ChoozyUser.current()
-                                                        post["authorId"] = ChoozyUser.current()?.objectId
-                                                        post["mediaUrl"] = mediaUrl
-                                                        post["placeId"] = placeId
-                                                        post["placeName"] = placeName
-                                                        
-                                                        post.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-                                                            
-                                                            if success{
-                                                                
-                                                                /**
-                                                                 * At this point we have successfully created and saved a Post.
-                                                                 * We now need to save a Comment.
-                                                                 */
-                                                                
-                                                                let comment = Comment()
-                                                                comment["author"] = ChoozyUser.current()
-                                                                comment["postId"] = post.objectId
-                                                                comment["comment"] = self.commentContent
-                                                                comment.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-                                                                    
-                                                                    if success{
-                                                                        
-                                                                        /**
-                                                                         * At this point we have successfully created and saved a Post, and Comment.
-                                                                         * This is our end goal. ⭐️⭐️⭐️⭐️⭐️
-                                                                         * We now need to dismiss the NewPostController
-                                                                         * and show the new Post on the mapView.
-                                                                         */
-                                                                        
-                                                                        Drop.down(" Thanks for posting! ", state: Custom.complete)
-                                                                        postButton.isEnabled = true
-                                                                        
-                                                                        //Refresh our Data after we add a new post.
-                                                                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addPostAfterPosting"), object: nil, userInfo: ["postId": post.objectId! as String])
-                                                                        
-                                                                        self.dismissViewController()
-                                                                    }
-                                                                        
-                                                                    else if let error = error{
-                                                                        
-                                                                        /**
-                                                                         * There was an error while saving the comment.
-                                                                         * We now need to alert the user, delete the post we just created (in the background),
-                                                                         * and allow the user to post again.
-                                                                         */
-                                                                        print(error)
-                                                                        
-                                                                        Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-                                                                        self.deletePost(post: post)
-                                                                        postButton.isEnabled = true
-                                                                        
-                                                                        
-                                                                    }else{
-                                                                        
-                                                                        /**
-                                                                         * There was an error while saving the comment.
-                                                                         * We now need to alert the user, delete the post we just created (in the background),
-                                                                         * and allow the user to post again.
-                                                                         */
-                                                                        
-                                                                        Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-                                                                        self.deletePost(post: post)
-                                                                        postButton.isEnabled = true
-                                                                        
-                                                                    }
-                                                                })
-                                                                
-                                                            }else if let error = error{
-                                                                
-                                                                /**
-                                                                 * There was an error while saving the post.
-                                                                 * We now need to alert the user
-                                                                 * and allow the user to post again.
-                                                                 */
-                                                                print(error)
-                                                                
-                                                                Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-                                                                postButton.isEnabled = true
-                                                                
-                                                            }else{
-                                                                
-                                                                /**
-                                                                 * There was an error while saving the post.
-                                                                 * We now need to alert the user
-                                                                 * and allow the user to post again.
-                                                                 */
-                                                                
-                                                                Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-                                                                postButton.isEnabled = true
-                                                                
-                                                            }
-                                                        })
-                                                        
+  
                                                     }
                                                 }
                                             })
                                         }
-
-//                                        //jt debug
-//                                        print(postMedia as Any)
-//                                        print (postMedia!)
-//                                        postMedia?.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-//                                            
-//                                            if let error = error{
-//                                                
-//                                                /**
-//                                                 * There was an error while saving the PFFile.
-//                                                 * We now need to alert the user
-//                                                 * and allow the user to post again.
-//                                                 */
-//                                                print(error)
-//                                                
-//                                                Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-//                                                postButton.isEnabled = true
-//                                
-//                                            }else{
-//                                                
-//                                                if success{
-//                                                    
-//                                                    /**
-//                                                     * At this point we have successfully created and saved a PFFile.
-//                                                     * We now need to save a Post and a Comment.
-//                                                     */
-//                                                    
-//                                                    guard
-//                                                        let mediaUrl = postMedia?.url,
-//                                                        let placeId = self.selectedPlace.id,
-//                                                        let placeName = self.selectedPlace.name
-//                                                    else {
-//                                                        return
-//                                                    }
-//                                                    
-//                                                    let post = Post()
-//                                                    post["likes"] = 0
-//                                                    post["views"] = 0
-//                                                    post["subAddress"] = location["subAddress"]
-//                                                    post["address"] = location["address"]
-//                                                    post["city"] = location["city"]
-//                                                    post["state"] = location["state"]
-//                                                    post["country"] = location["country"]
-//                                                    post["location"] = PFGeoPoint(latitude: takenLocation.latitude, longitude: takenLocation.longitude)
-//                                                    post["author"] = ChoozyUser.current()
-//                                                    post["authorId"] = ChoozyUser.current()?.objectId
-//                                                    post["mediaUrl"] = mediaUrl
-//                                                    post["placeId"] = placeId
-//                                                    post["placeName"] = placeName
-//                                                    
-//                                                    post.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-//                                                        
-//                                                        if success{
-//                                                            
-//                                                            /**
-//                                                             * At this point we have successfully created and saved a Post.
-//                                                             * We now need to save a Comment.
-//                                                             */
-//                                                            
-//                                                            let comment = Comment()
-//                                                            comment["author"] = ChoozyUser.current()
-//                                                            comment["postId"] = post.objectId
-//                                                            comment["comment"] = self.commentContent
-//                                                            comment.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-//                                                                
-//                                                                if success{
-//                                                                    
-//                                                                    /**
-//                                                                     * At this point we have successfully created and saved a Post, and Comment.
-//                                                                     * This is our end goal. ⭐️⭐️⭐️⭐️⭐️
-//                                                                     * We now need to dismiss the NewPostController
-//                                                                     * and show the new Post on the mapView.
-//                                                                     */
-//                                                                    
-//                                                                    Drop.down(" Thanks for posting! ", state: Custom.complete)
-//                                                                    postButton.isEnabled = true
-//                                                                    
-//                                                                    //Refresh our Data after we add a new post.
-//                                                                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addPostAfterPosting"), object: nil, userInfo: ["postId": post.objectId! as String])
-//                                                                    
-//                                                                    self.dismissViewController()
-//                                                                }
-//                                                                    
-//                                                                else if let error = error{
-//                                                                    
-//                                                                    /**
-//                                                                     * There was an error while saving the comment.
-//                                                                     * We now need to alert the user, delete the post we just created (in the background),
-//                                                                     * and allow the user to post again.
-//                                                                     */
-//                                                                    print(error)
-//                                                                    
-//                                                                    Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-//                                                                    self.deletePost(post: post)
-//                                                                    postButton.isEnabled = true
-//                                    
-//                                                                    
-//                                                                }else{
-//                                                                    
-//                                                                    /**
-//                                                                     * There was an error while saving the comment.
-//                                                                     * We now need to alert the user, delete the post we just created (in the background),
-//                                                                     * and allow the user to post again.
-//                                                                     */
-//                                                                    
-//                                                                    Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-//                                                                    self.deletePost(post: post)
-//                                                                    postButton.isEnabled = true
-//                                                           
-//                                                                }
-//                                                            })
-//                                                            
-//                                                        }else if let error = error{
-//                                                            
-//                                                            /**
-//                                                             * There was an error while saving the post.
-//                                                             * We now need to alert the user
-//                                                             * and allow the user to post again.
-//                                                             */
-//                                                            print(error)
-//                                                            
-//                                                            Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-//                                                            postButton.isEnabled = true
-//                                                        
-//                                                        }else{
-//                                                            
-//                                                            /**
-//                                                             * There was an error while saving the post.
-//                                                             * We now need to alert the user
-//                                                             * and allow the user to post again.
-//                                                             */
-//                                                            
-//                                                            Drop.down(" There was an error with your Post. Try again. ", state: Custom.error)
-//                                                            postButton.isEnabled = true
-//                                     
-//                                                        }
-//                                                    })
-//                                              
-//                                                }
-//                                            }
-//                                        })
                                       }))
                 
             }else{ //COMMENT CONTAINS INVALID CHARACTERS
@@ -569,7 +448,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             alertView.showTitle("Uh oh!", subTitle: "\n You can't post with an empty comment! \n", style: .info, closeButtonTitle: "Okay", duration: 0.0, colorStyle: UIColor.purple.hex.flat, colorTextButton: 0xECF0F1, circleIconImage: UIImage(named: "alertPinIcon"), animationStyle: .leftToRight)
         }
-        //
     }
     
     func deletePost(post: Post){
@@ -616,11 +494,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 return cell
                 
             }
-//            //cameron code
-//            postImageView.frame = cell.mediaView.bounds
-//            cell.mediaView.addSubview(postImageView)
-//            
-//            return cell
             
         case 1:
             
@@ -650,7 +523,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "postButtonCell") as! PostButtonCell
             cell.postButton.contentMode = .scaleAspectFit
-//            cell.backgroundColor = UIColor.blue.dark
             cell.backgroundColor = lightGreen
 
             
@@ -668,7 +540,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         default:
             
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-//            cell.backgroundColor = UIColor.blue.dark
             cell.backgroundColor = black
 
 
@@ -774,12 +645,17 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 picker.view.fadeOut()
                 
                 hasTakenVideo = true
-                
+               
                 //Reload the Table View
                 postTableView.reloadData()
                 
                 //Find Places
-                getSuggestedPlaces()
+                if placePost == true {
+                    loadCellForPlace()
+                } else {
+                    getSuggestedPlaces()
+                }
+                
 
             }
 
@@ -793,12 +669,17 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             picker.view.fadeOut()
     
             hasTakenPhoto = true
-    
+            
             //Reload the Table View
             postTableView.reloadData()
-            
+
             //Find Places
-            getSuggestedPlaces()
+            if placePost == true {
+                loadCellForPlace()
+            } else {
+                getSuggestedPlaces()
+            }
+            
         }
         
 // cameron og code
@@ -824,17 +705,6 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
         dismiss(animated: true, completion: nil)
     }
     
-    //JT added for video
-//    func startStopMoviePlayer(){
-//        if moviePlayerController.isPreparedToPlay{
-//            if moviePlayerController.playbackState == .playing{
-//                moviePlayerController.pause()
-//            }else{
-//                moviePlayerController.play()
-//            }
-//        }
-//    }
-    
     //MARK: - Collection View Delegate & DataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
@@ -853,6 +723,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let place = suggestedPlaces[indexPath.row]
         selectedPlace = place
+        getPlaceSpecs()
 
         print("did select a place")
         print(selectedPlace)
@@ -945,6 +816,23 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         })
     }
+    func loadCellForPlace(){
+        let placesCliet = GMSPlacesClient()
+        placesCliet.currentPlace(callback: { (placeLikelihoodList, error) -> Void in
+            let place = Place()
+            place.id = specPlace?.0
+            place.name = specPlace?.1
+            
+            print(place.id)
+            print(place.name)
+            
+            self.loadPhotoForPlace(with: place.id!, completion: {(photo) in
+                place.image = photo
+                self.suggestedPlaces.append(place)
+                self.postTableView.reloadData()
+            })
+        })
+    }
     
     func loadPhotoForPlace(with id: String, completion: @escaping (UIImage) -> ()){
         GMSPlacesClient.shared().lookUpPhotos(forPlaceID: id) { (photos, error) -> Void in
@@ -997,5 +885,39 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
     override var prefersStatusBarHidden : Bool {
         return true
     }
-
+//    func getPlaceCord() {
+//        let geoCoder = CLGeocoder()
+//        print(self.selectedPlace.address!)
+//        geoCoder.geocodeAddressString(self.selectedPlace.address!) {
+//            (placemarks, error) in
+//            let placemark = placemarks?.first
+//            let lat = placemark?.location?.coordinate.latitude
+//            let lon = placemark?.location?.coordinate.longitude
+//            print(lat)
+//            print(lon)
+//            self.placeLat = lat!
+//            self.placeLog = lon!
+//        }
+//    }
+    func getPlaceSpecs() {
+        let placesClient = GMSPlacesClient()
+        let placeID = self.selectedPlace.id
+        print(placeID)
+        
+        placesClient.lookUpPlaceID(placeID!, callback: { (place, err) -> Void in
+            if let error = err {
+                print("shit is fucked \(error.localizedDescription)")
+                return
+            }
+            if let place = place {
+                self.placeLat = place.coordinate.latitude
+                print(self.placeLat)
+                self.placeLog = place.coordinate.longitude
+                print(self.placeLat)
+                print("it worked")
+            } else {
+                print("no place details for \(placeID)")
+            }
+        })
+    }
 }

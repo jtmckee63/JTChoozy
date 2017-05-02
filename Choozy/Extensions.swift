@@ -13,6 +13,8 @@ import MobileCoreServices
 import MediaPlayer
 import SCLAlertView
 
+var specPlace: (String, String)?
+
 extension UIView {
     
     func circleWithBorder(_ color: UIColor, width: CGFloat){
@@ -410,17 +412,19 @@ extension UIViewController{
     }
     func exPlacePoster(_ placeId: String, placeName: String) {
         let thePlace = Place()
+
         let postController = NewPostController()
         thePlace.id = placeId
         thePlace.name = placeName
+        specPlace = (placeId, placeName)
+        print(placeId)
+        print(placeName)
         
         self.present(postController, animated: true, completion: nil)
+//        self.show(postController, sender: specPlace)
 
     }
-//    func getPlaceForPost() -> (placeId: String, placeName: String){
-//        let place = (placeId, placeName)
-//        return place
-//    }
+
     
     //MARK: - Segue Navigations
     func showLoginController(){

@@ -20,6 +20,7 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     var placeImage: UIImage?
     var posts = [Post]()
     
+    
     let refreshControl = UIRefreshControl()
     let headerView = PostHeaderReusableView()
     
@@ -55,10 +56,6 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
         refreshControl.addTarget(self, action: #selector(refreshAllData), for: .valueChanged)
         postsCollectionView.addSubview(refreshControl)
         
-        //JT added for post button on place screen
-        
-//        headerView.postButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
-       
         //Initial Call to load our data.
         refreshAllData()
     }
@@ -75,6 +72,14 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
     func goToPostController(){
         if isUserLoggedIn(){
             self.showPostController()
+        }
+    }
+    func goToPostForPlace(){
+        if isUserLoggedIn() {
+            print((place?.0)!,(place?.1)!)
+            placePost = true
+            print(placePost)
+            self.exPlacePoster((place?.0)!, placeName: (place?.1)!)
         }
     }
     func loadPosts(){
@@ -220,7 +225,7 @@ class PlaceController: UIViewController, UICollectionViewDelegate, UICollectionV
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! PostHeaderReusableView
            
             headerView.headerImageView.image = placeImage
-            headerView.postButton.addTarget(self, action: #selector(goToPostController), for: .touchUpInside)
+            headerView.postButton.addTarget(self, action: #selector(goToPostForPlace), for: .touchUpInside)
             let postB = headerView.postButton
             postB?.layer.cornerRadius = 0.5 * (postB?.bounds.size.width)!
             postB?.clipsToBounds = true

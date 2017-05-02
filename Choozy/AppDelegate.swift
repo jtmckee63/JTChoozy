@@ -14,6 +14,8 @@ import Parse
 import ParseFacebookUtilsV4
 import SwiftyDrop
 import GooglePlaces
+var placePost = false
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
