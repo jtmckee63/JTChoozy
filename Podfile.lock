@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - Bolts (1.8.4):
@@ -10,13 +10,14 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - BTNavigationDropdownMenu (0.4.1)
   - DropDownMenuKit (0.8.2)
-  - FBSDKCoreKit (4.21.0):
+  - FBSDKCoreKit (4.23.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.21.0):
+  - FBSDKLoginKit (4.23.0):
     - FBSDKCoreKit
-  - GoogleMaps/Base (2.2.0)
-  - GooglePlaces (2.2.0):
-    - GoogleMaps/Base (= 2.2.0)
+  - GoogleMaps/Base (2.3.1)
+  - GooglePlaces (2.3.1):
+    - GoogleMaps/Base (= 2.3.1)
+  - paper-onboarding (2.0.1)
   - Parse (1.14.4):
     - Bolts/Tasks (~> 1.8)
   - ParseFacebookUtilsV4 (1.11.1):
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - DropDownMenuKit
   - FBSDKCoreKit (~> 4.18)
   - GooglePlaces
+  - paper-onboarding (~> 2.0.1)
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
@@ -57,15 +59,16 @@ CHECKOUT OPTIONS:
     :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   DropDownMenuKit: 0acbd983fefac6718b1df209198ba6336c3e2772
-  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
-  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
-  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
-  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  GoogleMaps: c66a71058b9b1294bcdd5463a68e357fa50c079f
+  GooglePlaces: 4a7b22debfa1af65017b82943431822607e45201
+  paper-onboarding: a8e001214d9ce9decf78e160b3823f396dbd51ac
   Parse: b0aa91d2c435e53d4a9af26e741e014c9b35c42e
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
@@ -73,6 +76,6 @@ SPEC CHECKSUMS:
   SwiftyDrop: 785f95aabc26c4d832576bb78dc4ba7d0594a95b
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: cef8ed2750b11cb9a2dc918d36f203d674dcf0eb
+PODFILE CHECKSUM: 773b6f64b25c02ab84beb1461bbc6749a40b3b9b
 
 COCOAPODS: 1.2.0

@@ -56,6 +56,8 @@
 		4CB9F0A21E7088D400113585 /* PostButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB9F0A01E7088D400113585 /* PostButtonCell.xib */; };
 		4CD5AC8E1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5AC8D1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift */; };
 		AB2B42ED1EB27BEC002232EB /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B42EC1EB27BEC002232EB /* SettingsController.swift */; };
+		AB4BA04C1EFA0B5C005041DE /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BA04B1EFA0B5C005041DE /* OnBoardingView.swift */; };
+		AB4BA04E1EFA20A2005041DE /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BA04D1EFA20A2005041DE /* OnBoardingViewController.swift */; };
 		AB9F23B21E9AC16D006CAE50 /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9F23B11E9AC16D006CAE50 /* MyAnnotation.swift */; };
 		FFF454188DEC9A7B13C0E898 /* Pods_Choozy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */; };
 /* End PBXBuildFile section */
@@ -112,6 +114,8 @@
 		4CB9F0A01E7088D400113585 /* PostButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostButtonCell.xib; sourceTree = "<group>"; };
 		4CD5AC8D1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceAnnotation.swift; sourceTree = "<group>"; };
 		AB2B42EC1EB27BEC002232EB /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		AB4BA04B1EFA0B5C005041DE /* OnBoardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		AB4BA04D1EFA20A2005041DE /* OnBoardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		AB9F23B11E9AC16D006CAE50 /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
 		C97E35F1CE8C88328B63A41C /* Pods_Choozy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Choozy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Choozy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Choozy/Pods-Choozy.release.xcconfig"; sourceTree = "<group>"; };
@@ -206,11 +210,13 @@
 			children = (
 				4C6895DA1E68E8CC00208365 /* LoginController.swift */,
 				4C6F0EAD1E67B1B700D26955 /* ViewController.swift */,
+				AB4BA04B1EFA0B5C005041DE /* OnBoardingView.swift */,
 				4C49FA9B1E8C765E002D976A /* DetailController.swift */,
 				4C49FAB31E8CA6A2002D976A /* PlaceController.swift */,
 				4CB9F0861E6E32A500113585 /* NewPostController.swift */,
 				4C49FAB51E8CA6BC002D976A /* ProfileController.swift */,
 				AB2B42EC1EB27BEC002232EB /* SettingsController.swift */,
+				AB4BA04D1EFA20A2005041DE /* OnBoardingViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -339,7 +345,7 @@
 				TargetAttributes = {
 					4C6F0EA71E67B1B600D26955 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 2WU5ER73VT;
+						DevelopmentTeam = T4VNN34759;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -456,6 +462,7 @@
 				4CD5AC8E1E9745D200DB2DA7 /* SearchPlaceAnnotation.swift in Sources */,
 				4C49FAC71E8DD864002D976A /* UserPostCell.swift in Sources */,
 				4C6895E51E68EB8900208365 /* Helpers.swift in Sources */,
+				AB4BA04E1EFA20A2005041DE /* OnBoardingViewController.swift in Sources */,
 				4CB9F08F1E6E356500113585 /* PostMediaViewCell.swift in Sources */,
 				4C49FAB01E8CA043002D976A /* ChoozyPlaceLabel.swift in Sources */,
 				4C49FAB41E8CA6A2002D976A /* PlaceController.swift in Sources */,
@@ -464,6 +471,7 @@
 				AB2B42ED1EB27BEC002232EB /* SettingsController.swift in Sources */,
 				4C49FAA91E8C947B002D976A /* CommentCell.swift in Sources */,
 				4C49FAAC1E8C94AC002D976A /* CommentDetailButton.swift in Sources */,
+				AB4BA04C1EFA0B5C005041DE /* OnBoardingView.swift in Sources */,
 				4CB9F0991E6E415300113585 /* PlaceImageCell.swift in Sources */,
 				AB9F23B21E9AC16D006CAE50 /* MyAnnotation.swift in Sources */,
 				4C6F0EAC1E67B1B700D26955 /* AppDelegate.swift in Sources */,
@@ -596,10 +604,10 @@
 			baseConfigurationReference = D65A7526FDB9A0D55EC56AA5 /* Pods-Choozy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2WU5ER73VT;
+				DEVELOPMENT_TEAM = T4VNN34759;
 				INFOPLIST_FILE = Choozy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AustinNight.Choozy;
+				PRODUCT_BUNDLE_IDENTIFIER = AustiKnight.Choozy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -610,10 +618,10 @@
 			baseConfigurationReference = D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 2WU5ER73VT;
+				DEVELOPMENT_TEAM = T4VNN34759;
 				INFOPLIST_FILE = Choozy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AustinNight.Choozy;
+				PRODUCT_BUNDLE_IDENTIFIER = AustiKnight.Choozy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

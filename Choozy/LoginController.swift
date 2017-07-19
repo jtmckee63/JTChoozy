@@ -18,7 +18,10 @@ class LoginController: UIViewController {
     var videoBackground: BackgroundVideo?
     @IBOutlet var logginButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
-    
+    //onboarding
+    var newUser = false
+    let userDefaults = UserDefaults.standard
+
     @IBOutlet var choozyLogo: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +45,6 @@ class LoginController: UIViewController {
         logginButton.alpha = 1
         logginButton.addTarget(self, action: #selector(self.facebookLoginOrRegister), for: .touchUpInside)
         logginButton.setTitle("Login with Facebook", for: .normal)
-        
         choozyLogo.layer.cornerRadius = 0.5 * choozyLogo.bounds.size.width
         choozyLogo.clipsToBounds = true
         
@@ -60,6 +62,7 @@ class LoginController: UIViewController {
             if let user = user{
                 if user.isNew{
                     self.facebookRegisterUser()
+                    self.newUser = true
                 }else{
                     
                     guard let choozyUser = user as? ChoozyUser else{
@@ -69,6 +72,10 @@ class LoginController: UIViewController {
                     if let _ = choozyUser.firstName, let _ = choozyUser.lastName, let _ = choozyUser.profilePictureUrl{
                         
                         self.dismissViewController()
+                        if self.newUser == false {
+                            print("it works TymeRex")
+                            onBoardingCheck()
+                        }
                         
                         //Refresh Our Data after we finish creating an account.
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshAllData"), object: nil, userInfo: nil)
@@ -124,9 +131,9 @@ class LoginController: UIViewController {
                                                 if success{
                                                     
                                                     Drop.upAll()
-                                    
-                                                    self.dismissViewController()
                                                     
+                                                    self.dismissViewController()
+//                                                    self.showOnboardController()
                                                     //Refresh Our Data after we finish creating an account.
                                                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshAllData"), object: nil, userInfo: nil)
                                                     
@@ -148,13 +155,40 @@ class LoginController: UIViewController {
             })
         }
     }
+//    func showOnBoard(){
+//        let user = ChoozyUser.current()
+//
+//        self.performSegue(withIdentifier: "onboard", sender: user)
+//        print("GO")
+//    }
     
     //MARK: - Status Bar Override methods
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////        if segue.identifier == "detail"{
+////            let detailController: DetailController = segue.destination as! DetailController
+////            detailController.post = (sender as? Post)!
+////        }
+//        if segue.identifier == "onboard" {
+//            let onboardController: OnBoardingViewController = segue.destination as! OnBoardingViewController
+//            onboardController.user = (sender as? ChoozyUser)!
+//            
+//        }
+//    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "onboard" {
+//            let onboardController: OnBoardingViewController = segue.destination as! OnBoardingViewController
+//            onboardController.user = (sender as? ChoozyUser)!
+//            
+//        }
+//    }
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
+    
 }

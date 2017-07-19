@@ -14,6 +14,7 @@ import Parse
 import ParseFacebookUtilsV4
 import SwiftyDrop
 import GooglePlaces
+import paper_onboarding
 var placePost = false
 
 
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
     var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
     var black: UIColor = UIColor.black
+    //JT onboard
+    let userDefaults = UserDefaults.standard
+    var tutorialCheck = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -58,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Initialize Parse
         Parse.initialize(with: configuration)
         
+        
         //Intialize PFFacebookUtils
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
         
@@ -66,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         saveInstallation(deviceToken: deviceToken)

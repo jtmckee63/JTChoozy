@@ -44,6 +44,10 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var post = Post()
     var comments: [Comment] = []
     
+    //JT disable like
+    var canLike = true
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -434,6 +438,9 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         })
     }
+    func disableLike(){
+        canLike = false
+    }
 //    
 //    func showLikeAnimation(){
 //        for _ in 1...30{
@@ -458,11 +465,17 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
 //            let postSubAddress = post.subAddress,
 //            let postAddress = post.address,
 //            let postCity = post.city,
-//            let postState = post.state
+//            let postState = post.state,
+//            let postLikeCount = post.likes
+//        
+//            
+//            
+//            
 //            else{
 //                return
 //        }
-//        
+//    }
+//
 //        PFCloud.callFunction(inBackground: "sendLikeNotification", withParameters: ["postId": postId, "postAuthorId": postAuthorId, "postSubAddress": postSubAddress, "postAddress": postAddress, "postCity": postCity, "postState": postState], block: {(response: Any?, error: Error?) in
 //            
 //            if let error = error{

@@ -13,5 +13,6 @@ pod 'AlamofireImage', '~> 3.1'
 pod 'GooglePlaces'
 pod 'SwiftyJSON'
 pod 'DropDownMenuKit'
+pod 'paper-onboarding', '~> 2.0.1'
 pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
 end

@@ -471,6 +471,10 @@ extension UIViewController{
     func dismissViewController(){
         self.dismiss(animated: true, completion: nil)
     }
+    //Added for onboard
+    func showOnboardController(){
+        self.performSegue(withIdentifier: "onboard", sender: self)
+    }
     
     func pop(){
         self.navigationController?.popViewController(animated: true)
@@ -485,7 +489,8 @@ extension UserDefaults{
             searchDistance = d
         }else{
             //Set a Default Value
-            searchDistance = 100.0
+            //originally sete to 100.0
+            searchDistance = 50.0
             setSearchDistance(distance: searchDistance)
         }
         return searchDistance

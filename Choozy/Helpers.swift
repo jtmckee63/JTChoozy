@@ -194,6 +194,11 @@ func isUserLoggedIn() -> Bool{
     }
 }
 
+func onBoardingCheck() -> Bool {
+    let onBoardCheck = false
+    return onBoardCheck
+}
+
 //MARK: Drop Enum
 enum Custom: DropStatable {
     

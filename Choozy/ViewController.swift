@@ -22,6 +22,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var placeSearchBar: UISearchBar!
+
+
     
     let locationManager = CLLocationManager()
     var postAnnotations:[PostAnnotation] = []
@@ -30,13 +32,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var menuView: BTNavigationDropdownMenu!
     
     @IBOutlet weak var bigButtonPost: UIButton!
-
     
+    var searchBool = false
     //colors JT
     var lightBlue = UIColor(red:0.42, green:0.93, blue:1.00, alpha:1.0)
     var blurple = UIColor(red:0.25, green:0.00, blue:1.00, alpha:1.0)
     var lightGreen = UIColor(red:0.05, green:1.00, blue:0.00, alpha:1.0)
     var black: UIColor = UIColor.black
+    
+    //JT added for time feature
+    var currentDate = Date()
+    var formatter = DateFormatter()
+    let calendar = NSCalendar.autoupdatingCurrent
+
+    //JT onboard
+    let userDefaults = UserDefaults.standard
+    var tutorialCheck = false
+    var logoutCheck = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +79,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 self.mapView.removeAnnotations(self.postAnnotations)
 
                 let keyword = "Eat"
+                self.placeSearchBar.text = ""
                 self.searchForPlaces(for: keyword)
             }
             if indexPath == 1 {
@@ -74,6 +87,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 self.mapView.removeAnnotations(self.postAnnotations)
 
                 let keyword = "Bars"
+                self.placeSearchBar.text = ""
+
                 self.searchForPlaces(for: keyword)
             }
             if indexPath == 2 {
@@ -81,9 +96,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 self.mapView.removeAnnotations(self.postAnnotations)
 
                 let keyword = "Entertainment"
+                self.placeSearchBar.text = ""
+
                 self.searchForPlaces(for: keyword)
             }
             if indexPath == 3 {
+                self.placeSearchBar.text = ""
                 self.removeSearchPlacesFromMapView()
                 self.refreshAllData()
             }
@@ -128,33 +146,45 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         placeSearchBar.barTintColor = black
         placeSearchBar.placeholder = "Pizza, Beer, Fun, etc..."
         placeSearchBar.delegate = self
-        
         //Gesture for Dismissing the Keyboard
         let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(gesture)
         
         if !isUserLoggedIn(){
+            self.tutorialCheck = false
             logout()
         }else{
             refreshAllData()
+            let alertController = UIAlertController(title: "Tutorial", message: "Would You Like To View The Choozy Tutorial?", preferredStyle: .alert)
+            let dismissHandler = {
+                (action: UIAlertAction!) in
+                self.dismiss(animated: true, completion: nil)
+                self.tutorialCheck = true
+            }
+
+            let onboard = UIAlertAction(title:"OK", style: .default, handler:  { action in self.performSegue(withIdentifier: "onboard", sender: self) } )
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: dismissHandler))
+
+            alertController.addAction(onboard)
+            print("THIS WOKRS FOR ONBOARDING __________---------------__________---------")
+            
+            if (tutorialCheck == false || logoutCheck == true) {
+                self.present(alertController, animated: true, completion: nil)
+            }
+
         }
     }
-
     
-    //JT added
+        //JT added
     override func viewDidAppear(_ animated: Bool) {
         //added JT
         super.viewDidAppear(animated)
-//        navigationBarMenu.container = view
-//        toolbarMenu.container = view
-//        
-//        //added JT
-//        self.mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true);
     }
     //JT ended
     
     func logout(){
         ChoozyUser.logOut()
+        self.logoutCheck = true
         self.showLoginController()
     }
 
@@ -164,6 +194,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
 
     func refreshAllData(){
+        if userDefaults.bool(forKey: "onBoardingComplete") {
+            self.tutorialCheck = true
+        }
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
@@ -193,6 +226,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
          take each found object and add a
          post.
          */
+        
+        //JT added for Time feature
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateResult = formatter.string(from: currentDate)
+        
         
         let postsQuery = PFQuery(className: "Post")
         postsQuery.includeKeys(["author"])
@@ -228,6 +266,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                             continue
                         }
                         
+                        
                         let post = Post()
                         post.objectId = id
                         post.id = id
@@ -246,6 +285,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                         post.placeName = placeName
                         post.timeStamp = timeStamp
                         post.updatedTimeStamp = updatedTimeStamp
+                        
+                        print(timeStamp)
+                        let stamp = self.formatter.string(from: timeStamp)
+                        print(stamp)
+                        print(dateResult)
+                        //JT added to cal the number of days between the current date and the post..to delete in background based on logic
+                        let numOfDays = self.currentDate.daysBetweenDate(toDate: timeStamp)
+                        print(numOfDays)
+                        //JT added to check the date on the posts...only pulls up if the post was made either yesterday or today
+                        if self.calendar.isDateInYesterday(timeStamp) || self.calendar.isDateInToday(timeStamp) {
+                            print("this works **********")
+                            //This works and will be production
+//                            self.addPostToMapView(post: post, showCallout: false, showZoom: false)
+                        }
                         
                         self.addPostToMapView(post: post, showCallout: false, showZoom: false)
                     }
@@ -316,7 +369,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         annotation.title = annotation.post.placeName
         annotation.subtitle = getDateStringFromDate(post.timeStamp!)
         
-        annotation.blurplePinColor()
+//        annotation.blurplePinColor()
         
         postAnnotations.append(annotation)
         
@@ -355,8 +408,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.mapView.removeAnnotations(searchPlaceAnnotations)
         searchPlaceAnnotations.removeAll()
     }
-
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBool = false
+    }
     
+    func searchBarResultsListButtonClicked(_ searchBar: UISearchBar) {
+        searchBool = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        searchBool = true
+    }
     func searchForPlaces(for keyword: String){
         
         removeSearchPlacesFromMapView()
@@ -366,8 +428,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let trimmedKeyword = keyword.replacingOccurrences(of: " ", with: "")
         
         let apiKey = "AIzaSyAO54B6oPO_SQGxlMIGzC8e0Khj3Dsy_no"
-        let meters = "15000"
+        //JT change for disticntion between search and drop down
+        var meters = ""
+        if placeSearchBar.text == "" {
+            meters = "3000"
+
+        } else {
+            meters = "10000"
+
+        }
         
+        print(meters)
         getUserLocation({(location) in
             
             let latitude = location.latitude
@@ -656,6 +727,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
         }
         
+//        if segue.identifier == "onboard" {
+//            let onboardController: OnBoardingViewController = segue.destination as! OnBoardingViewController
+//            onboardController.performSegue(withIdentifier: "onboard", sender: nil)
+//        }
+
         let backItem = UIBarButtonItem()
         backItem.title = ""
         navigationItem.backBarButtonItem = backItem
@@ -724,4 +800,11 @@ struct SearchPlace {
     var longitude: Double?
     var id: String?
     var address: String?
+}
+
+extension Date {
+    func daysBetweenDate(toDate: Date) -> Int{
+        let components = Calendar.current.dateComponents([.day], from: self, to: toDate)
+        return components.day ?? 0
+    }
 }
