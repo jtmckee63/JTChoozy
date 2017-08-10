@@ -405,31 +405,34 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
                         let likes = object["likes"] as? Int
                         
                         object["likes"] = likes! + 1
-                        object.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
-                            if success{
-                                
-                                if self.post.author?.objectId != ChoozyUser.current()?.objectId{
-//                                    self.sendLikeNotification()
+                        if (self.canLike == true) {
+                            object.saveInBackground(block: {(success: Bool, error: Error?) -> Void in
+                                if success{
+                                    
+                                    if self.post.author?.objectId != ChoozyUser.current()?.objectId{
+                                        //                                    self.sendLikeNotification()
+                                    }
+                                    
+                                    Drop.down(" : ) Thanks for liking this post", state: Custom.complete)
+                                    self.post.likes = likes! + 1
+                                    //                                self.showLikeAnimation()
+                                    //                                self.saveLikedPost(post: self.post)
+                                    self.disableLike()
+                                    DispatchQueue.main.async(execute: {
+                                        self.detailTableView.reloadData()
+                                    })
+                                    
+                                    
+                                }else if let error = error{
+                                    Drop.down(" : ( There was an error liking this post. Please try again.", state: Custom.error)
+                                    print(error)
+                                }else{
+                                    Drop.down(" : ( There was an error liking this post. Please try again.", state: Custom.error)
+                                    
                                 }
-                                
-                                Drop.down(" : ) Thanks for liking this post", state: Custom.complete)
-                                self.post.likes = likes! + 1
-//                                self.showLikeAnimation()
-//                                self.saveLikedPost(post: self.post)
-                                
-                                DispatchQueue.main.async(execute: {
-                                    self.detailTableView.reloadData()
-                                })
-                  
-                                
-                            }else if let error = error{
-                                Drop.down(" : ( There was an error liking this post. Please try again.", state: Custom.error)
-                                print(error)
-                            }else{
-                                Drop.down(" : ( There was an error liking this post. Please try again.", state: Custom.error)
-                          
-                            }
-                        })
+                            })
+                        }
+                        
                     }
                     
                 }else{
@@ -490,7 +493,7 @@ class DetailController: UIViewController, UITableViewDelegate, UITableViewDataSo
 //            }
 //        })
 //    }
-    
+
     func increaseViewCount(post: Post, amount: Int){
         
         guard let postId = post.id else{

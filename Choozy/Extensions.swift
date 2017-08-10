@@ -490,7 +490,7 @@ extension UserDefaults{
         }else{
             //Set a Default Value
             //originally sete to 100.0
-            searchDistance = 50.0
+            searchDistance = 10.0
             setSearchDistance(distance: searchDistance)
         }
         return searchDistance

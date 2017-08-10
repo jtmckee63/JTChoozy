@@ -54,10 +54,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         super.viewDidLoad()
         
         let items = ["Eat", "Drink", "Play", "Post"]
-//        self.selectedCellLabel.text = "Choozy"
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = black
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Dropdown Menu", items: items as [AnyObject])
         menuView.cellHeight = 50
@@ -168,8 +166,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             alertController.addAction(onboard)
             print("THIS WOKRS FOR ONBOARDING __________---------------__________---------")
             
-            if (tutorialCheck == false || logoutCheck == true) {
-                self.present(alertController, animated: true, completion: nil)
+            if (tutorialCheck == false) {
+                if (logoutCheck == true){
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
 
         }
@@ -197,6 +197,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         if userDefaults.bool(forKey: "onBoardingComplete") {
             self.tutorialCheck = true
         }
+        self.mapView.removeAnnotations(self.postAnnotations)
+        self.removeSearchPlacesFromMapView()
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationManager.delegate = self
@@ -234,7 +236,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         let postsQuery = PFQuery(className: "Post")
         postsQuery.includeKeys(["author"])
-        postsQuery.whereKey("location", nearGeoPoint: location, withinMiles: Double(300))
+        //og code 300
+        postsQuery.whereKey("location", nearGeoPoint: location, withinMiles: Double(30))
         postsQuery.limit = 1000
         postsQuery.findObjectsInBackground(block: {(objects: [PFObject]?, error: Error?) -> Void in
             if let error = error{
@@ -292,15 +295,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                         print(dateResult)
                         //JT added to cal the number of days between the current date and the post..to delete in background based on logic
                         let numOfDays = self.currentDate.daysBetweenDate(toDate: timeStamp)
-                        print(numOfDays)
-                        //JT added to check the date on the posts...only pulls up if the post was made either yesterday or today
-                        if self.calendar.isDateInYesterday(timeStamp) || self.calendar.isDateInToday(timeStamp) {
-                            print("this works **********")
-                            //This works and will be production
-//                            self.addPostToMapView(post: post, showCallout: false, showZoom: false)
+                        print("THIS IS THE NUMBER OF DAYS",numOfDays)
+                        if numOfDays > -2 {
+                            print("THIS WORKS *******")
+                            self.addPostToMapView(post: post, showCallout: false, showZoom: false)
                         }
-                        
-                        self.addPostToMapView(post: post, showCallout: false, showZoom: false)
                     }
                     
                     let postAnnotationsCount = self.postAnnotations.count
@@ -490,10 +489,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         navigationItem.backBarButtonItem = backItem
         
         if (view.annotation?.isKind(of: PostAnnotation.self))!{
-//            //Cam Code -start-
-//            let postAnnotation = view.annotation as! PostAnnotation
-//            let post = postAnnotation.post
-//            //Cam Code -end-
             //JT added for differnt annotation buttons
             if control == view.leftCalloutAccessoryView {
                 if let annotation = view.annotation {
@@ -516,9 +511,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         
         if (view.annotation?.isKind(of: SearchPlaceAnnotation.self))!{
-            //JT comment Cam Code
-//            let searchPlaceAnnotation = view.annotation as! SearchPlaceAnnotation
-//            let searchPlace = searchPlaceAnnotation.searchPlace
+
             
             if control == view.leftCalloutAccessoryView {
                 if let annotation = view.annotation {
@@ -535,10 +528,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                     self.showPlaceController(placeId, placeName: placeName)
                 }
             }
-//            JT comment out cam code
-//            if let placeId = searchPlace.id, let placeName = searchPlace.name {
-//                self.showPlaceController(placeId, placeName: placeName)
-//            }
+
         }
     }
     
@@ -726,11 +716,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             settingsController.user = (sender as? ChoozyUser)!
             
         }
-        
-//        if segue.identifier == "onboard" {
-//            let onboardController: OnBoardingViewController = segue.destination as! OnBoardingViewController
-//            onboardController.performSegue(withIdentifier: "onboard", sender: nil)
-//        }
 
         let backItem = UIBarButtonItem()
         backItem.title = ""

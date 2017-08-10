@@ -345,7 +345,7 @@
 				TargetAttributes = {
 					4C6F0EA71E67B1B600D26955 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = T4VNN34759;
+						DevelopmentTeam = 2WU5ER73VT;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -604,10 +604,10 @@
 			baseConfigurationReference = D65A7526FDB9A0D55EC56AA5 /* Pods-Choozy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = T4VNN34759;
+				DEVELOPMENT_TEAM = 2WU5ER73VT;
 				INFOPLIST_FILE = Choozy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AustiKnight.Choozy;
+				PRODUCT_BUNDLE_IDENTIFIER = AustiNight.Choozy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -618,10 +618,10 @@
 			baseConfigurationReference = D25FE345D9379A66C06788DF /* Pods-Choozy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = T4VNN34759;
+				DEVELOPMENT_TEAM = 2WU5ER73VT;
 				INFOPLIST_FILE = Choozy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = AustiKnight.Choozy;
+				PRODUCT_BUNDLE_IDENTIFIER = AustiNight.Choozy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -122,7 +122,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                 let takenLoc = PFGeoPoint(latitude: takenLocation.latitude, longitude: takenLocation.longitude)
                 let placeLocation = PFGeoPoint(latitude: self.placeLat, longitude: self.placeLog)
                 let distance = takenLoc.distanceInMiles(to: placeLocation)
-                print(distance)
+                print("distance ::::", distance)
                 
                 
                 getLocationDictionary(location: CLLocation(latitude: takenLocation.latitude, longitude: takenLocation.longitude),
@@ -184,7 +184,7 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                                                             post["placeId"] = placeId
                                                             post["placeName"] = placeName
                                                             
-                                                            if (distance > 1) {
+                                                            if (distance < 0.1) {
                                                                 Drop.down(" You are not near this place :( ", state: Custom.error)
                                                                 self.deletePost(post: post)
                                                                 postButton.isEnabled = true
@@ -333,8 +333,9 @@ class NewPostController: UIViewController, UIImagePickerControllerDelegate, UINa
                                                         post["mediaUrl"] = mediaUrl
                                                         post["placeId"] = placeId
                                                         post["placeName"] = placeName
-                                                        
-                                                        if (distance > 1) {
+                                                        //DISTANCE TO PLACE NEW POSTS 0.03
+                                                        print("this is the distance ***************_________________*****************", distance)
+                                                        if (distance > 0.09) {
                                                             Drop.down(" You are not near this place :( ", state: Custom.error)
                                                             self.deletePost(post: post)
                                                             postButton.isEnabled = true

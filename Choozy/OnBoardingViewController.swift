@@ -56,11 +56,11 @@ class OnBoardingViewController: UIViewController, PaperOnboardingDataSource, Pap
         let descriptionFont = UIFont(name: "AvenirNext-Regular", size: 18)!
         
         return [
-            ("onBoardPin", "Recent Posts Near You", "Checkout all of the posts within the last 24 hours in your area! Check out the post by selecting the far right Choozy icon or get directions by selecting the left Car Icon", "", backgroundColorOne, UIColor.white, UIColor.white, titleFont, descriptionFont),
-            ("onBoardPost", "Tap To See!", "By selecting the choozy icon on the pin you can view that post, after which you can like or leave a comment", "", backgroundColorTwo, UIColor.black, UIColor.black, titleFont, descriptionFont),
-            ("onBoardSearch", "Search For A Place", "No ones posted yet at the place you were looking for? Just type the place in the search bar and check out the recent posts.", "", backgroundColorThree, UIColor.white, UIColor.white, titleFont, descriptionFont),
+            ("onBoardPin", "Recent Posts Near You", "Checkout all of the posts within the last 48 hours in your area! Check out the post by selecting the pin and then the far right Choozy icon. Maybe you just need directions? Get directions by selecting the left Car Icon", "", backgroundColorOne, UIColor.white, UIColor.white, titleFont, descriptionFont),
+            ("onBoardPost", "Tap To See!", "While checking out the post you have selected, you should leave a comment or like that post!", "", backgroundColorTwo, UIColor.black, UIColor.black, titleFont, descriptionFont),
+            ("onBoardSearch", "Search For A Place", "No one has posted at the place you were looking for? Just type the place in the search bar and check out the recent posts.", "", backgroundColorThree, UIColor.white, UIColor.white, titleFont, descriptionFont),
             ("onBoardDrop", "Cant Decide?", "Maybe you want Choozy to choose? Select a genre from the drop down list to show options near you!", "", backgroundColorFour, UIColor.black, UIColor.black, titleFont, descriptionFont),
-            ("onBoardPlace", "Place Specific!", "Search for a place or select one from Choozy's choices and view the the posts for that place! If you want to post there just press Tap To Post button to make a post", "", backgroundColorFive, UIColor.white, UIColor.white, titleFont, descriptionFont),
+            ("onBoardPlace", "Place Specific!", "Know where you want to post? Search for a place or select one from Choozy's choices and view the the posts for that place! If you want to post there just press 'Tap To Post' button to make a post", "", backgroundColorFive, UIColor.white, UIColor.white, titleFont, descriptionFont),
             ("onBoardProfile", "Make Your Profile Shine!", "Earn your level and show people why your choices are the way to go!", "", backgroundColorSix, UIColor.black, UIColor.black, titleFont, descriptionFont)
             ][index]
     }
